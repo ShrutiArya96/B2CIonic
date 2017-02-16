@@ -1,0 +1,125 @@
+<ion-view class="home" view-title="Home" hide-back-button="true" cache-view="false">
+    <style media="screen">
+    .slider-pager {
+        display: none;
+    }
+    </style>
+    <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        </button>
+    </ion-nav-buttons>
+    <ion-content overflow-scroll='true'>
+        <!-- Sliding of Home Page Images Starts from here -->
+        <ion-slide-box on-slide-changed="slideHasChanged($index)" does-continue="true" auto-play="true" id="home_slider">
+            <ion-slide style="background-color: transparent;">
+                <!-- style="background-color: #009688;" -->
+                <md-card md-theme="" style="background-color: #009688;" ">
+               <!--  <img ng-src="https://firebasestorage.googleapis.com/v0/b/iserveumainapp.appspot.com/o/dilliptest%2Fimg1.png?alt=media&token=5f72bbaa-679c-4c3d-aa37-0b72df64b0c3 " alt=" " /> -->
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline " style="color: #fff ">Get Benefit ++</span>
+                            <span class="md-subhead " style="color: #fff;text-transform: uppercase; ">{{BrandName}}</span>
+                        </md-card-title-text>
+                        <md-card-title-media>
+                            <div class="md-media-sm card-media "><img ng-src="img/getrecharge.png " alt=" " /></div>
+                        </md-card-title-media>
+                    </md-card-title>
+                    <md-card-actions layout="row " layout-align="end center ">
+                    </md-card-actions> 
+                </md-card>
+            </ion-slide>
+            <ion-slide style="background-color: transparent; ">
+                <md-card md-theme=" " style="background-color: #E040FB; ">
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline " style="color: #fff ">Get Extra Credit</span>
+                            <span class="md-subhead " style="color: #fff ">Sahre with your friends and get</span>
+                        </md-card-title-text>
+                        <md-card-title-media>
+                            <div class="md-media-sm card-media "><img ng-src="img/getmoney.png " alt=" " /></div>
+                        </md-card-title-media>
+                    </md-card-title>
+                    <md-card-actions layout="row " layout-align="end center ">
+                    </md-card-actions>
+                </md-card>
+            </ion-slide>
+            <ion-slide style="background-color: transparent; ">
+                <md-card md-theme=" " style="background-color: #7986CB; ">
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline " style="color: #fff ">One Stop Recharge</span>
+                            <span class="md-subhead " style="color: #fff ">Shop with your family</span>
+                        </md-card-title-text>
+                        <md-card-title-media>
+                            <div class="md-media-sm card-media "><img ng-src="img/stop.png " alt=" " /></div>
+                        </md-card-title-media>
+                    </md-card-title>
+                    <md-card-actions layout="row " layout-align="end center ">
+                    </md-card-actions>
+                </md-card>
+            </ion-slide>
+        </ion-slide-box>
+        <div class="card " style="padding: 18px 0px; ">
+            <p class="text-center " style="padding-bottom: 9px; color: #2b47e4">Recharge or Pay for</p>
+            <ion-scroll direction="x " scrollbar-x="false " overflow-scroll="false ">
+                <div class="row text-center ">
+                    <div class="col col-20 " native-transitions native-transitions-options="{type: 'flip', direction: 'up', duration:100} " ui-sref="app.mobile " style="font-size: 11px; cursor: pointer; color: #444; "><img ng-src="img/iPhone-48.png " width="40% " height="40% " alt=" ">
+                        <br/>Mobile</div>
+                    <div class="col col-20 " native-transitions ui-sref="app.dth " style="font-size: 11px; cursor: pointer; color: #444; "><img ng-src="img/TV-48.png " width="40% " height="40% " alt=" ">
+                        <br/>DTH</div>
+                    <div class="col col-20 " ui-sref="app.electricity " style="font-size: 11px; cursor: pointer; color: #444; "><img ng-src="img/Greentech-48.png " width="40% " height="40% " alt=" ">
+                        <br/>Electricity</div>
+                    <div class="col col-20 " native-transitions native-transitions-options="{type: 'flip', direction: 'up', duration:100} " ui-sref="app.datacard " style="font-size: 11px; cursor: pointer; color: #444; "><img ng-src="img/USB On-48.png " width="40% " height="40% " alt=" ">
+                        <br/>Datacard</div>
+                    <div class="col col-20 " native-transitions native-transitions-options="{type: 'flip', direction: 'up', duration:100} " ui-sref="app.gas " style="font-size: 11px; cursor: pointer; color: #444; "><img ng-src="img/Gas-48.png " width="40% " height="40% " alt=" ">
+                        <br/>Gas</div>
+                    <div class="col col-20 " native-transitions native-transitions-options="{type: 'flip', direction: 'up', duration:100} " ui-sref="app.insurance " style="font-size: 11px; cursor: pointer; color: #444; "><img ng-src="img/Umbrella-48.png " width="40% " height="40% " alt=" ">
+                        <br/>Insurance</div>
+                </div>
+            </ion-scroll>
+        </div>
+        <!-- <div class="card " style="padding: 18px 0px; ">
+            <div class="row text-center ">
+                <div class="col col-33 " native-transitions native-transitions-options="{type: 'flip', direction: 'up', duration:100} " style="font-size: 10px; cursor: pointer; color: #444; " ui-sref="app.mobile "><img ng-src="img/iPhone-48.png " width="40% " height="40% " alt=" ">
+                    <br/>Mobile</div>
+                <div class="col col-33 " native-transitions style="font-size: 11px; cursor: pointer; color: #444; " ui-sref="app.dth "><img ng-src="img/TV-48.png" width="40% " height="40% " alt=" ">
+                    <br/>DTH</div>
+                <div class="col col-33 " style="font-size: 11px; cursor: pointer; color: #444; " ui-sref="app.electricity "><img ng-src="img/Greentech-48.png" width="40% " height="40% " alt=" ">
+                    <br/>Electricity</div>
+            </div>
+        </div>
+        
+         <div class="card " style="padding: 18px 0px; ">
+            <div class="row text-center ">
+                <div class="col col-33 " native-transitions native-transitions-options="{type: 'flip', direction: 'up', duration:100} " style="font-size: 10px; cursor: pointer; color: #444; " ui-sref="app.gas "><img ng-src="img/Gas-48.png " width="40% " height="40% " alt=" ">
+                    <br/>Gas</div>
+                <div class="col col-33 " native-transitions style="font-size: 11px; cursor: pointer; color: #444; " ui-sref="app.datacard "><img ng-src="img/USB On-48.png" width="40% " height="40% " alt=" ">
+                    <br/>Datacard</div>
+                <div class="col col-33 " style="font-size: 11px; cursor: pointer; color: #444; " ui-sref="app.insurance "><img ng-src="img/Umbrella-48.png" width="40% " height="40% " alt=" ">
+                    <br/>Insurance</div>
+            </div>
+        </div> -->
+        <div class="row text-center clear " style="margin-top: -10%; ">
+            <div class="col col-50 ">
+                <div class="card " ui-sref="app.sendmoney"><img ng-src="img/showreport.svg " width="25% " alt=" " style="margin-top: 5%; "> <br/>Send Money
+                </div>
+            </div>
+            <div class="col col-50 ">
+                <div class="card "><img ng-src="img/showreport.svg " width="25% " alt=" " style="margin-top: 5%; "> <br/>Request money
+                </div>
+            </div>
+        </div>
+       <!--  <div class="row text-center clear " style="margin-top: -10%; ">
+            <div class="col col-40 ">
+                <div class="card "><img ng-src="img/showreport.svg " width="25% " alt=" " style="margin-top: 5%; "> <br/>Add
+                </div>
+            </div>
+            <div class="col col-20 ">
+            </div>
+            <div class="col col-40 ">
+                <div class="card "><img ng-src="img/showreport.svg " width="25% " alt=" " style="margin-top: 5%; "> <br/>Ok
+                </div>
+            </div>
+        </div> -->
+    </ion-content>
+</ion-view>

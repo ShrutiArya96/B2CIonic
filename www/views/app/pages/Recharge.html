@@ -1,0 +1,422 @@
+<ion-view  cache-view="false">
+<ion-nav-title class="title">Recharge</ion-nav-title>
+    <ion-nav-bar class="bar bar-header bar-blue mynavbar">
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+        <!-- <ion-nav-buttons side="left">
+            <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+            </button>
+        </ion-nav-buttons> -->
+    </ion-nav-bar>
+    <ion-content has-header="true" padding="true" scroll="false" direction="xy" class="hero slide-up" ng-class="{expanded:$scope.isExpanded}">
+        <ion-slide-box slide-tabs-scrollable="true" show-pager="false" overflow-scroll="true" ion-slide-tabs>
+            <ion-slide ion-slide-tab-label="Top-Up" class="block">
+                <form ng-submit="MobileRecharge()" name="MobileForm" >
+                    <md-input-container class="md-block">
+                        <label>Phone Number</label>
+                        <md-icon md-svg-src="img/phone-call.svg"></md-icon>
+                        <input ng-model="RechargeModel.phnumber" step="any" name="Mmobileno" max="10" min="10" maxlength="10" ng-pattern="/^[1-9]([0-9]{1,10}$)/" id="recharge_phonenumber" required>
+                        <div ng-messages="MobileForm.Mmobileno.$error" multiple md-auto-hide="false">
+                            <div ng-message="required">
+                                You Must Enter the Phone Number
+                            </div>
+
+                            <div ng-message="min">
+                                Minimum 10 digit is Required
+                            </div>
+
+                            <div ng-message="pattern">
+                                Only Numbers are allowed.
+                            </div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>Select Operator</label>
+                        <md-icon md-svg-src="img/wifi.svg"></md-icon>
+                        <md-select name="type" ng-model="RechargeModel.operator" name="Moperator" required>
+                            <md-option value="">Choose Operator</md-option>
+                            <md-option value="AIRCEL">AIRCEL</md-option>
+                            <md-option value="AIRTEL">AIRTEL</md-option>
+                            <md-option value="BSNL">BSNL</md-option>
+                            <md-option value="IDEA">IDEA</md-option>
+                            <md-option value="LOOP">LOOP</md-option>
+                            <md-option value="MTNL DELHI">MTNL DELHI</md-option>
+                            <md-option value="MTNL MUMBAI">MTNL MUMBAI</md-option>
+                            <md-option value="MTS">MTS</md-option>
+                            <md-option value="RELIANCE CDMA">RELIANCE CDMA</md-option>
+                            <md-option value="RELIANCE GSM">RELIANCE GSM</md-option>
+                            <md-option value="TATA DOCOMO">TATA DOCOMO</md-option>
+                            <md-option value="TELENOR">TELENOR</md-option>
+                            <md-option value="VIDEOCON">VIDEOCON</md-option>
+                            <md-option value="VIRGIN CDMA">VIRGIN CDMA</md-option>
+                            <md-option value="VIRGIN GSM">VIRGIN GSM</md-option>
+                            <md-option value="VODAFONE">VODAFONE</md-option>
+                            <md-option value="TataIndicom">TataIndicom</md-option>
+                            <md-option value="T24(Flexi)">T24(Flexi)</md-option>
+                        </md-select>
+                        <div ng-messages="MobileForm.Moperator.$error">
+                            <div ng-message="required">Please Select Operator.</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>Amount</label>
+                        <md-icon md-svg-src="img/rupee.svg"></md-icon>
+                        <input ng-model="RechargeModel.amount" name="Mamount" required min="1">
+                        <div ng-messages="MobileForm.Mamount.$error" role="alert">
+                            <div ng-message="required">
+                                Enter Valide Amount..
+                            </div>
+                        </div>
+                    </md-input-container>
+                    <div class="padding">
+                        <button class="button button-block button-calm" type="submit">Submit</button>
+                    </div>
+                </form>
+            </ion-slide>
+            <ion-slide ion-slide-tab-label="Special">
+                <form ng-submit="SpecialRecharge()" name="SpecialForm" class="block">
+                    <md-input-container class="md-block">
+                        <label>Phone Number</label>
+                        <md-icon md-svg-src="img/phone-call.svg"></md-icon>
+                        <input required name="clientName" ng-model="SpecialRechargeModel.phnumber" name="Smobileno" maxlength="10" minlength="10" pattern="/^\d{10}$/" required>
+                        <div ng-messages="SpecialForm.Smobileno.$error">
+                            <div ng-message-exp="['required', 'minlength', 'pattern']">
+                                Please Enter Valide Mobile No.
+                            </div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>Select Operator</label>
+                        <md-icon md-svg-src="img/wifi.svg"></md-icon>
+                        <md-select ng-model="SpecialRechargeModel.operator" name="Soperator" required>
+                            <md-option value="">Choose Operator</md-option>
+                            <md-option value="TATA DOCOMO stv">TATA DOCOMO stv</md-option>
+                            <md-option value="T24(Special)">T24(Special)</md-option>
+                            <md-option value="BSNL VALIDITY">BSNL VALIDITY</md-option>
+                            <md-option value="MTNL Validity">MTNL Validity</md-option>
+                        </md-select>
+                        <div ng-messages="SpecialForm.Soperator.$error">
+                            <div ng-message="required">Please Select Operator.</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>Amount</label>
+                        <md-icon md-svg-src="img/rupee.svg"></md-icon>
+                        <input required ng-model="SpecialRechargeModel.amount" name="Samount" required min="1">
+                        <div ng-messages="SpecialForm.Samount.$error" role="alert">
+                            <div ng-message="required">
+                                Enter Valide Amount..
+                            </div>
+                        </div>
+                    </md-input-container>
+                    <!-- <ion-md-input placeholder="Amount" hightlight-color="energized" type="number"></ion-md-input> -->
+                    <div class="padding">
+                        <button class="button button-block button-calm" type="submit">Submit</button>
+                    </div>
+                </form>
+            </ion-slide>
+            <ion-slide ion-slide-tab-label="Dth">
+                <form ng-submit="DthRecharge()" name="DthForm" class="block">
+                    <md-input-container class="md-block">
+                        <label>Customer ID</label>
+                        <md-icon md-svg-src="img/id.svg"></md-icon>
+                        <input ng-model="DthRechargeModel.customerid" name="DcustomerId" required ng-pattern="/^[0-9]+\b$/">
+                        <div ng-messages="DthForm.DcustomerId.$error">
+                            <div ng-message="pattern">
+                                Please Enter Valide Customer ID.
+                            </div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>Select Operator</label>
+                        <md-icon md-svg-src="img/wifi.svg"></md-icon>
+                        <md-select name="type" ng-model="DthRechargeModel.operator" name="Doperator" required>
+                            <md-option value="">Choose Operator</md-option>
+                            <md-option value="BIGTV DTH">BIGTV DTH</md-option>
+                            <md-option value="AIRTEL DTH">AIRTEL DTH</md-option>
+                            <md-option value="TATASKY DTH">TATASKY DTH</md-option>
+                            <md-option value="SUN DIRECT DTH">SUN DIRECT DTH</md-option>
+                            <md-option value="VIDEOCON DTH">VIDEOCON DTH</md-option>
+                            <md-option value="DISH TV DTH">DISH TV DTH</md-option>
+                            <md-option value="TATASKY B2B DTH">TATASKY B2B DTH</md-option>
+                        </md-select>
+                        <div ng-messages="DthForm.Doperator.$error">
+                            <div ng-message="required">Please Select Operator.</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>Amount</label>
+                        <md-icon md-svg-src="img/rupee.svg"></md-icon>
+                        <input ng-model="DthRechargeModel.amount" name="Damount" required min="1">
+                        <div ng-messages="DthForm.Damount.$error" role="alert">
+                            <div ng-message="required">
+                                Enter Valide Amount..
+                            </div>
+                        </div>
+                    </md-input-container>
+                    <!-- <ion-md-input placeholder="Amount" hightlight-color="energized" type="number"></ion-md-input> -->
+                    <div class="padding">
+                        <button class="button button-block button-calm" type="submit">Submit</button>
+                    </div>
+                </form>
+            </ion-slide>
+            <ion-slide ion-slide-tab-label="Data Card">
+                <form ng-submit="DataCardRecharge()" name="DataCard" class="block">
+                    <md-input-container class="md-block">
+                        <!-- <md-icon md-svg-src="img/ic_phone_24px.svg"></md-icon> -->
+                        <label>DataCard Number</label>
+                        <md-icon md-svg-src="img/card.svg"></md-icon>
+                        <input required ng-model="DataCardRechargeModel.datacardno" name="DCnumber" pattern="/^[0-9]+\b$/" maxlength="10" minlength="10">
+                        <div ng-messages="projectForm.clientName.$error">
+                            <div ng-message-exp="['required', 'minlength', 'pattern']">
+                                Please Enter Valide DataCard Number.
+                            </div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>Select Operator</label>
+                        <md-icon md-svg-src="img/wifi.svg"></md-icon>
+                        <md-select name="type" ng-model="DataCardRechargeModel.operator" name="DCoperator">
+                            <md-option value="">Choose Operator</md-option>
+                            <md-option value="VODAFONE DATACARD">VODAFONE DATACARD</md-option>
+                            <md-option value="Airtel DATACARD">Airtel DATACARD</md-option>
+                            <md-option value="TATA PHOTON PLUS DATACARD">TATA PHOTON PLUS DATACARD</md-option>
+                            <md-option value="RELIANCE DATACARD">RELIANCE DATACARD</md-option>
+                            <md-option value="RELIANCE BROADBAND DATACARD">RELIANCE BROADBAND DATACARD</md-option>
+                            <md-option value="MTS DATACARD">MTS DATACARD</md-option>
+                            <md-option value="BSNL DATACARD">BSNL DATACARD</md-option>
+                            <md-option value="MTNL MUMBAI DATACARD">MTNL MUMBAI DATACARD</md-option>
+                            <md-option value="IDEA DATACARD">IDEA DATACARD</md-option>
+                            <md-option value="TataIndicom DATACARD">TataIndicom DATACARD</md-option>
+                            <md-option value="TATADocomo DATACARD">TATADocomo DATACARD</md-option>
+                            <md-option value="AIRCEL DATACARD">AIRCEL DATACARD</md-option>
+                        </md-select>
+                        <div ng-messages="DataCard.DCoperator.$error">
+                            <div ng-message="required">Please Select Operator.</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>Amount</label>
+                        <md-icon md-svg-src="img/rupee.svg"></md-icon>
+                        <input ng-model="DataCardRechargeModel.amount" name="DCamount" ng-pattern="/^[1-9][0-9]*$/" required min="1">
+                        <div ng-messages="DataCard.DCamount.$error" role="alert">
+                            <div ng-message="required">
+                                Enter Valide Amount..
+                            </div>
+                        </div>
+                    </md-input-container>
+                    <!-- <ion-md-input placeholder="Amount" hightlight-color="energized" type="number"></ion-md-input> -->
+                    <div class="padding">
+                        <button class="button button-block button-calm" type="submit">Submit</button>
+                    </div>
+                </form>
+            </ion-slide>
+            <ion-slide ion-slide-tab-label="Post Paid">
+                <form ng-submit="Postpaid_Recharge()" name="PostPaid" class="block">
+                    <md-input-container class="md-block">
+                        <!-- <md-icon md-svg-src="img/ic_phone_24px.svg"></md-icon> -->
+                        <label>Phone Number</label>
+                        <md-icon md-svg-src="img/phone-call.svg"></md-icon>
+                        <input required ng-model="PostPaidRechargeModel.phnumber" name="postpaidnumber" ng-pattern="/^\d{10}$/">
+                        <div ng-messages="PostPaid.postpaidnumber.$error">
+                            <div ng-message="required">This is required.</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>Select Operator</label>
+                        <md-icon md-svg-src="img/wifi.svg"></md-icon>
+                        <md-select name="type" ng-model="PostPaidRechargeModel.operator" name="postpaidoperator" required>
+                            <md-option value="">Choose Operator</md-option>
+                            <md-option value="AIRCEL POSTPAID">AIRCEL POSTPAID</md-option>
+                            <md-option value="BSNL POSTPAID">BSNL MOBILE POSTPAID</md-option>
+                            <md-option value="IDEA POSTPAID">IDEA POSTPAID</md-option>
+                            <md-option value="RELIANCE POSTPAID">RELIANCE POSTPAID</md-option>
+                            <md-option value="TATA DOCOMO POSTPAID">TATA DOCOMO POSTPAID</md-option>
+                            <md-option value="VODAFONE POSTPAID">VODAFONE POSTPAID</md-option>
+                            <md-option value="AIRTEL POSTPAID">AIRTEL POSTPAID</md-option>
+                            <md-option value="RELIANCE CDMA POSTPAID">RELIANCE CDMA POSTPAID</md-option>
+                            <md-option value="TATA INDICOM POSTPAID">TATA INDICOM POSTPAID</md-option>
+                            <md-option value="LOOP POSTPAID">LOOP POSTPAID</md-option>
+                            <md-option value="BSNL LANDLINE">BSNL LANDLINE</md-option>
+                            <md-option value="AIRTEL BROADBAND (DSL)">AIRTEL BROADBAND (DSL)</md-option>
+                            <md-option value="AIRTEL LANDLINE">AIRTEL LANDLINE</md-option>
+                            <md-option value="IDEA LANDLINE">IDEA LANDLINE</md-option>
+                            <md-option value="MTS POSTPAID">MTS POSTPAID</md-option>
+                        </md-select>
+                        <div ng-messages="PostPaid.postpaidoperator.$error">
+                            <div ng-message="required">Please Select Operator.</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block" ng-show="circlefield">
+                        <label>Select Operator</label>
+                        <md-select ng-model="PostPaidRechargeModel.circle" name="circle" ng-required="circlefield">
+                            <md-option value="">Select Operator Circle</md-option>
+                            <md-option value="AndamanNicrobar">Andaman Nicrobar</md-option>
+                            <md-option value="AndhraPradesh">AndhraPradesh</md-option>
+                            <md-option value="ArunachalPradesh">Arunachal Pradesh</md-option>
+                            <md-option value="Assam">Assam</md-option>
+                            <md-option value="Bangalore">Bangalore</md-option>
+                            <md-option value="Bihar">Bihar</md-option>
+                            <md-option value="Chennai">Chennai</md-option>
+                            <md-option value="Chhattisgarh">Chhattisgarh</md-option>
+                            <md-option value="DadraandNagarHaveli">Dadraand NagarHaveli</md-option>
+                            <md-option value="DamanandDiu">Damanand Diu</md-option>
+                            <md-option value="Delhi">Delhi</md-option>
+                            <md-option value="Goa">Goa</md-option>
+                            <md-option value="Gujarat">Gujarat</md-option>
+                            <md-option value="Haryana">Haryana</md-option>
+                            <md-option value="HimachalPradesh">HimachalPradesh</md-option>
+                            <md-option value="JammuAndKashmir">Jammu And Kashmir</md-option>
+                            <md-option value="Jharkhand">Jharkhand</md-option>
+                            <md-option value="Karnataka">Karnataka</md-option>
+                            <md-option value="Kerala">Kerala</md-option>
+                            <md-option value="Kolkata">Kolkata</md-option>
+                            <md-option value="MadhyaPradesh">Madhya Pradesh</md-option>
+                            <md-option value="Maharashtra">Maharashtra</md-option>
+                            <md-option value="Manipur">Manipur</md-option>
+                            <md-option value="Meghalaya">Meghalaya</md-option>
+                            <md-option value="Mizoram">Mizoram</md-option>
+                            <md-option value="Mumbai">Mumbai</md-option>
+                            <md-option value="Nagaland">Nagaland</md-option>
+                            <md-option value="Orissa">Orissa</md-option>
+                            <md-option value="Pondicherry">Pondicherry</md-option>
+                            <md-option value="Punjab">Punjab</md-option>
+                            <md-option value="Rajasthan">Rajasthan</md-option>
+                            <md-option value="Sikkim">Sikkim</md-option>
+                            <md-option value="TamilNadu">TamilNadu</md-option>
+                            <md-option value="Tripura">Tripura</md-option>
+                            <md-option value="Uttar Pradesh East">Uttar Pradesh East</md-option>
+                            <md-option value="Uttar Pradesh West">Uttar Pradesh West</md-option>
+                            <md-option value="Uttrakhand">Uttrakhand</md-option>
+                            <md-option value="West Bengal">West Bengal</md-option>
+                        </md-select>
+                        <div ng-messages="PostPaid.circle.$error">
+                            <div ng-message="required">Please Select Circle.</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block" ng-show="circlefield">
+                        <label>STD Code</label>
+                        <input  ng-model="PostPaidRechargeModel.stdCode" name="stdnumber" ng-pattern="/^[0-9]+\b$/" ng-required="circlefield">
+                    </md-input-container>
+                    <md-input-container class="md-block" ng-show="circlefield">
+                        <label>Account No.</label>
+                        <input  ng-model="PostPaidRechargeModel.accountNo" name="accnumber" ng-pattern="/^[0-9]+\b$/" ng-required="circlefield">
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>Amount</label>
+                        <md-icon md-svg-src="img/rupee.svg"></md-icon>
+                        <input ng-model="PostPaidRechargeModel.billamount" name="postpaidamount" ng-pattern="/^[1-9][0-9]*$/" required min="1">
+                        <div ng-messages="PostPaid.postpaidamount.$error" role="alert">
+                            <div ng-message="required">
+                                Enter Valide Amount..
+                            </div>
+                        </div>
+                    </md-input-container>
+                    <!-- <ion-md-input placeholder="Amount" hightlight-color="energized" type="number"></ion-md-input> -->
+                    <div class="padding">
+                        <button class="button button-block button-calm" type="submit">Submit</button>
+                    </div>
+                </form>
+            </ion-slide>
+            <ion-slide ion-slide-tab-label="Utility">
+                <form ng-submit="Utility_billpay()" name="Utility">
+                    <md-input-container class="md-block">
+                        <label>Please Choose Type</label>
+                        <md-icon md-svg-src="img/type.svg"></md-icon>
+                        <md-select ng-model="UtilitybillModel.operator" name="utilityoperator" required>
+                            <md-option value="">{{placeholderOperator}}</md-option>
+                            <md-option value="MTNL Delhi LandLine Utility">MTNL Delhi Landline</md-option>
+                            <md-option value="BSNL Landline Utility">BSNL Landline</md-option>
+                            <md-option value="Reliance Energy(Mumbai) Utility">Reliance Energy (Mumbai)</md-option>
+                            <md-option value="MSEDC Limited Utility">MSEDC Limited</md-option>
+                            <md-option value="Torrent Power Utility">Torrent Power</md-option>
+                            <md-option value="Mahanagar Gas Limited Utility">Mahanagar Gas Limited</md-option>
+                            <md-option value="Tata AIG Life Utility">Tata AIG Life</md-option>
+                            <md-option value="ICICI Pru Life Utility">ICICI Pru Life</md-option>
+                            <md-option value="BSES Rajdhani">BSES Rajdhani</md-option>
+                            <md-option value="BSES Yamuna">BSES Yamuna</md-option>
+                            <md-option value="North Delhi Power Limited">North Delhi Power Limited</md-option>
+                            <md-option value="Brihan Mumbai Electric Supply and Transport Undertaking">Brihan Mumbai Electric Supply and Transport Undertaking BILL</md-option>
+                            <md-option value="Rajasthan Vidyut Vitran Nigam Limited">Rajasthan Vidyut Vitran Nigam Limited</md-option>
+                            <md-option value="Soouthern power Distribution Company Ltd of Andhra Pradesh( APSPDCL)">Southern power Distribution Company Ltd of Andhra Pradesh( APSPDCL)</md-option>
+                            <md-option value="Bangalore Electricity Supply Company">Bangalore Electricity Supply Company</md-option>
+                            <md-option value="Madhya Pradesh Madhya Kshetra Vidyut Vitaran Company Limited - Bhopal">Madhya Pradesh Madhya Kshetra Vidyut Vitaran Company Limited - Bhopal</md-option>
+                            <md-option value="Noida Power Company Limited">Noida Power Company Limited</md-option>
+                            <md-option value="Madhya Pradesh Paschim Kshetra Vidyut Vitaran Indor">Madhya Pradesh Paschim Kshetra Vidyut Vitaran Indor</md-option>
+                            <md-option value="Calcutta Electricity Supply Ltd">Calcutta Electricity Supply Ltd</md-option>
+                            <md-option value="Chhattisgarh State Electricity Board">Chhattisgarh State Electricity Board</md-option>
+                            <md-option value="India Power Corporation Limited">India Power Corporation Limited</md-option>
+                            <md-option value="Jamshedpur Utilities and Services Company Limited">Jamshedpur Utilities and Services Company Limited</md-option>
+                            <md-option value="IGL (Indraprast Gas Limited)">IGL (Indraprast Gas Limited)</md-option>
+                            <md-option value="Gujarat Gas company Limited">Gujarat Gas company Limited</md-option>
+                            <md-option value="ADANI GAS">ADANI GAS</md-option>
+                            <md-option value="Tikona Postpaid">Tikona Postpaid</md-option>
+                        </md-select>
+                        <div ng-messages="Utility.utilityoperator.$dirty">
+                            <div ng-message="required">Please Choose Operator.</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>{{placeholderPhone}}</label>
+                        <input ng-model="UtilitybillModel.phnumber" name="utilitynumber" ng-pattern="/^[0-9]+\b$/" required>
+                        <div ng-messages="Utility.utilitynumber.$dirty
+                  && Utility.utilitynumber.$error.required">
+                            <div ng-message="required">Please Choose Operator.</div>
+                        </div>
+                        <div ng-messages="Utility.utilitynumber.$dirty
+                  && Utility.utilitynumber.$error.pattern">
+                            <div ng-message="required">Please Choose Operator.</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>{{placeholderAmount}}</label>
+                        <input ng-model="UtilitybillModel.billamount" name="utilityamount" ng-pattern="/^[1-9][0-9]*$/" ng-required="submitFlag" min="1">
+                        <div ng-messages="Utility.utilityamount.$dirty
+          && Utility.utilityamount.$error.required">
+                            <div ng-message="required">Please Enter Bill Amount.</div>
+                        </div>
+                        <div ng-messages="Utility.utilityamount.$dirty
+          && Utility.utilityamount.$error.pattern">
+                            <div ng-message="required">Please Enter Exact Bill Amount.</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block" ng-show="AccoutField">
+                        <label>{{placeholderAccount}}</label>
+                        <input ng-model="UtilitybillModel.accountNo" name="utilityaccountno" ng-required="AccoutField">
+                        <div ng-messages="Utility.utilityaccountno.$dirty
+                  && Utility.utilityaccountno.$error.required">
+                            <div ng-message="required">Enter Correct {{placeholderAccount}}.
+                            </div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block" ng-show="AuthField && !BauthField">
+                        <label>{{placeholderService}}</label>
+                        <input  ng-model="UtilitybillModel.auth" name="authno" ng-pattern="/^[0-9]{2}$/" ng-required="AuthField">
+                        <div ng-messages="Utility.authno.$dirty
+                  && Utility.authno.$error.required">
+                            <div ng-message="required">Enter Correct Auth No.</div>
+                        </div>
+                        <div ng-messages="Utility.authno.$dirty
+                  && Utility.authno.$error.pattern">
+                            <div ng-message="required">Enter Correct Auth No.</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block" ng-show="BauthField && !AuthField">
+                        <label>{{placeholderService}}</label>
+                        <md-select ng-model="UtilitybillModel.Bauth" name="utilityoperator" ng-required="BauthField">
+                            <md-option value="">Choose Type</md-option>
+                            <md-option value="LLI">Landline Individual</md-option>
+                            <md-option value="LLC">Landline Corporate</md-option>
+                        </md-select>
+                    </md-input-container>
+                    <div class="padding">
+                        <button ng-click="FetchBillAmount()" ng-hide="submitFlag" class="button button-block button-calm">Fetch Bill Amount</button>
+                    </div>
+                    <div class="padding" ng-show="submitFlag">
+                        <button type="submit" class="button button-block button-calm">Submit</button>
+                    </div>
+                </form>
+            </ion-slide>
+        </ion-slide-box>
+    </ion-content>
+</ion-view>

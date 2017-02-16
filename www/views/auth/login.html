@@ -1,0 +1,64 @@
+<style>
+.app-icon {
+    margin-top: 5em;
+    text-align: center;
+}
+
+.content h1 {
+    text-align: center;
+    color: cornflowerblue;
+}
+</style>
+<ion-view cache-view="false">
+    <ion-content style="background-color: #2b47e4" scroll="false">
+        <div class="hero no-header flat">
+            <div class="content">
+                <div class="app-icon">
+                    <img ng-src="img/Payizu.png" width="72%">
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <div class="bottom-content row" ng-hide="hideSocial_loginButton">
+            <div class="col col-bottom">
+                <button class="button button-block button-positive icon-right ion-social-facebook" ng-click="facebookSignIn()">
+                    Sign In with Facebook
+                </button>
+            </div>
+        </div>
+        <div class="bottom-content row" ng-hide="hideSocial_loginButton">
+            <div class="col col-bottom">
+                <button class="button button-block button-assertive icon-right ion-social-google" ng-click="googleSignIn()">
+                    Sign In with Google
+                </button>
+            </div>
+        </div>
+        <div class="bottom-content row" ng-hide="hideSocial_loginButton">
+        <div class="col col-bottom">
+                <button class="button button-block button-assertive icon-right ion-social-google" ng-click="logout()">
+                    Logout
+                </button>
+            </div>
+        </div>
+
+        <form name="authorizationForm" novalidate="" ng-submit="NewUser(authorizationForm.$valid)" ng-show="hideSocial_loginButton">
+        <div class="col">
+            <div class="list">
+                <label class="item item-input">
+                    <span class="input-label">Mobile Number</span>
+                    <input type="text" name="mobilenumber" ng-model="Login_Model.phonenumber" required>
+                </label>
+                <div class="error-container" ng-show="authorizationForm.mobilenumber.$error" ng-messages="authorizationForm.mobilenumber.$error">
+                </div>
+            </div>
+            </div>
+            <div class="col col-bottom">
+            <button class="button button-full button-positive" type="submit">
+               Submit
+            </button>
+            </div>
+        </form>
+    </ion-content>
+</ion-view>

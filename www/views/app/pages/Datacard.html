@@ -1,0 +1,56 @@
+<ion-view  cache-view="false">
+<ion-nav-title class="title">DataCard Recharge
+</ion-nav-title>
+    <ion-nav-bar class="bar bar-header bar-blue">
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-content has-header="true" padding="true" scroll="false" overflow-scroll='true'>
+        <form ng-submit="DataCardRecharge(DataCardForm.DataCard.$valid)" name="DataCardForm.DataCard" class="block">
+            <md-input-container class="md-block">
+                <!-- <md-icon md-svg-src="img/ic_phone_24px.svg"></md-icon> -->
+                <label>DataCard Number</label>
+               <!--  <md-icon md-svg-src="img/card.svg"></md-icon> -->
+                <input required ng-model="DataCardRechargeModel.datacardno" type="tel" name="DCnumber" ng-pattern="/^[0-9]+\b$/" maxlength="10" minlength="10">
+                <div ng-messages="DataCardForm.DataCard.DCnumber.$error">
+                    <div ng-message-exp="['required', 'minlength', 'pattern']">
+                        Please Enter Valide DataCard Number.
+                    </div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Select Operator</label>
+              <!--   <md-icon md-svg-src="img/wifi.svg"></md-icon> -->
+                <md-select name="type" ng-model="DataCardRechargeModel.operator" name="DCoperator" required>
+                    <md-option value="VODAFONE DATACARD">VODAFONE DATACARD</md-option>
+                    <md-option value="Airtel DATACARD">Airtel DATACARD</md-option>
+                    <md-option value="TATA PHOTON PLUS DATACARD">TATA PHOTON PLUS DATACARD</md-option>
+                    <md-option value="RELIANCE DATACARD">RELIANCE DATACARD</md-option>
+                    <md-option value="RELIANCE BROADBAND DATACARD">RELIANCE BROADBAND DATACARD</md-option>
+                    <md-option value="MTS DATACARD">MTS DATACARD</md-option>
+                    <md-option value="BSNL DATACARD">BSNL DATACARD</md-option>
+                    <md-option value="MTNL MUMBAI DATACARD">MTNL MUMBAI DATACARD</md-option>
+                    <md-option value="IDEA DATACARD">IDEA DATACARD</md-option>
+                    <md-option value="TataIndicom DATACARD">TataIndicom DATACARD</md-option>
+                    <md-option value="TATADocomo DATACARD">TATADocomo DATACARD</md-option>
+                    <md-option value="AIRCEL DATACARD">AIRCEL DATACARD</md-option>
+                </md-select>
+                <div ng-messages="DataCardForm.DataCard.DCoperator.$error">
+                    <div ng-message="required">Please Select Operator.</div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Amount</label>
+               <!--  <md-icon md-svg-src="img/rupee.svg"></md-icon> -->
+                <input ng-model="DataCardRechargeModel.amount" name="DCamount" type="number" ng-pattern="/^[1-9][0-9]*$/" required min="1">
+                <div ng-messages="DataCardForm.DataCard.DCamount.$error" role="alert">
+                    <div ng-message="required">
+                        Enter Valide Amount..
+                    </div>
+                </div>
+            </md-input-container>
+            <div class="padding">
+                <button class="button button-block button-positive button-small" md-ink-ripple type="submit">Submit</button>
+            </div>
+    </ion-content>
+</ion-view>

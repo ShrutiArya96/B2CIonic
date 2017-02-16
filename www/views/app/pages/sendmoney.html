@@ -1,0 +1,28 @@
+<ion-view  cache-view="false" ng-controller="sendmoneyController">
+<ion-nav-title class="title">Send Money
+</ion-nav-title>
+    <ion-nav-bar class="bar bar-header bar-blue">
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-content has-header="true" padding="true" scroll="false" overflow-scroll='true'>
+        <form class="block" name="upiform" ng-submit="UPIcollect(upiform.$valid)">
+            <md-input-container class="md-block">
+                <label>Virtual Id/Mobile No.</label>
+                <input required type="text" name="vid" ng-model="upimodel.VirtualId" data-min="1" ng-pattern="/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@])[A-Za-z\d@]{5,}$/">
+                <div ng-messages="upiform.vid.$error" multiple="multiple" ng-if="upiform.vid.$dirty">
+                    <div ng-message="required">Please enter Virtual Id.</div>
+                    <div ng-message="pattern">Please enter a valid Virtual Id.</div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Amount</label>
+                <input required type="number" name="amount" ng-model="upimodel.amount" >
+                <div ng-messages="upiform.amount.$error" multiple="multiple" ng-if="upiform.amount.$dirty">
+                <div ng-message="required">Please enter Amount.</div>
+                </div>
+            </md-input-container>
+           <center><md-button class="md-raised md-primary " md-ink-ripple type="submit" ><span style="color: #fff;">Submit</span></md-button></center>
+        </form>
+    </ion-content>
+</ion-view>

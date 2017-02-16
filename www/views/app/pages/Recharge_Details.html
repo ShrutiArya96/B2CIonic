@@ -1,0 +1,78 @@
+<ion-view  cache-view="false">
+<ion-nav-title class="title">Recharge Txn Details</ion-nav-title>
+    <ion-nav-bar class="bar bar-header bar-blue">
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-content has-header="true" padding="true" style="">
+
+            <div class="list card">
+
+                  <div class="item item-avatar" style="background: url(img/black-bg1.jpg) center; background-size: cover;">
+                    <img ng-src="{{Images[recharge.operatorDescription]}}" alt="{{recharge.operatorDescription}}
+                    ">
+                    <h2 class="white">{{recharge.mobileNumber}}</h2>
+                    <h4 class="white">Amount:&nbsp;&#8377;{{recharge.amountTransacted}}</h4>
+                  </div>
+
+                  <div class="item item-body row" style="background-color: #3F51B5; background-size: cover;">
+                    <p style="color: #fff;">
+                        <div style="text-align: left; float: left;">
+                            <table>
+                                <tr>
+                                    <td><button style="width: 81px" class="button button-light button-small">Track ID&emsp;<i class="fa fa-search-plus"></i></button></td>
+                                    <td><button style="width: 101px" class="button button-stable2 button-small">{{ recharge.userTrackId }}</button></td>
+                                </tr>
+                                <tr>
+                                    <td><button style="width: 81px" class="button button-light button-small">User ID&emsp;<i class="fa fa-user"></i></button></td>
+                                    <td><button style="width: 101px" class="button button-stable2 button-small">{{ recharge.id }}</button></td>
+                                </tr>
+                                <tr>
+                                    <td><button style="width: 81px" class="button button-light button-small">User Nm&emsp;<i class="fa fa-user-o"></i></button></td>
+                                    <td><button style="width: 101px" class="button button-stable2 button-small">{{ recharge.userName }}</button></td>
+                                </tr>
+                                <tr>
+                                    <td><button style="width: 81px" class="button button-light button-small">Operator&emsp;<i class="fa fa-bullseye"></i></button></td>
+                                    <td><button style="width: 101px" class="button button-stable2 button-small">{{ recharge.peratorDescription }}</button></td>
+                                </tr>
+                                <tr>
+                                    <td><button style="width: 81px" class="button button-light button-small">Status&emsp;<i class="fa fa-line-chart"></i></button></td>
+                                    <td><button style="width: 101px" class="button button-stable2 button-small">{{ recharge.status }}</button></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div style="margin: 27px 0 0 13px; float: right; border: 0px solid #eee;">
+                            <table>
+                                <tr>
+                                    <td>PA:&emsp;</td>
+                                    <td>&#8377;{{ recharge.previousAmount }}</td>
+                                </tr>
+                                <tr>
+                                    <td>TA:&emsp;</td>
+                                    <td>&#8377;{{ recharge.amountTransacted }}</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td style="text-align: left;">
+                                        {{ recharge.status == "SUCCESS" ? "-" : "+" }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td><hr/></td>
+                                </tr>
+                                <tr>
+                                    <td>CA:&emsp;</td>
+                                    <td>&#8377;{{ recharge.balanceAmount }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </p>
+                  </div>
+
+            </div>
+
+
+
+    </ion-content>
+</ion-view>

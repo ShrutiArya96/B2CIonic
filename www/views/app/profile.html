@@ -1,0 +1,89 @@
+<ion-view class="profile-view" cache-view="false" >
+<ion-nav-title class="title">Profile</ion-nav-title>
+      <ion-nav-bar class="bar bar-header bar-blue">
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+        </ion-nav-bar>
+      <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear icon ion-log-out" on-tap="LogOut()">
+        </button>
+      </ion-nav-buttons>
+  <ion-content style="background-color: #EFEBE9;" padding="true" overflow-scroll="true">
+    <div class="top-content">
+      <!-- profile-container -->
+      
+        <div>
+        <img ng-src="img/dotted.jpg" width="100%" height="120px" style="z-index: -1;">
+        </div>
+        <div class="text-center" style="margin-top: -58px;"><img ng-src="img/avatar.jpg" width="30%" style="z-index: 1;border-radius: 100px;" style=""></div>
+      
+    </div>
+    <md-content layout-padding class="card" style="background-color: #fff;">
+    <form name="profile" ng-submit="Profile()">
+        <span class="pull-right padding"><button on-tap="ProfileEdit=!ProfileEdit" md-ink-ripple class="button button-assertive button-small" type="button"><img ng-src="img/png/pencil.png"></button></span>
+        <div class="row">
+          <md-input-container class="md-block" flex="50">
+            <label>First Name</label>
+            <input required md-no-asterisk name="firstName" ng-model="UserProfile.firstName" ng-disabled="!ProfileEdit">
+            <div ng-messages="profile.firstName.$error">
+              <div ng-message="required">This Fiels Can't be Empty!</div>
+            </div>
+          </md-input-container>
+          <md-input-container class="md-block" flex="50">
+            <label>Last Name</label>
+            <input required md-no-asterisk name="lastName" ng-model="UserProfile.lastName" ng-disabled="!ProfileEdit">
+            <div ng-messages="profile.lastName.$error">
+              <div ng-message="required">You must enter the last name</div>
+            </div>
+          </md-input-container>
+        </div>
+
+      <div layout="row">
+        <md-input-container flex="50">
+          <label>Email ID</label>
+          <input type="email" required name="email" ng-model="UserProfile.email" ng-disabled="!ProfileEdit">
+          <div ng-messages="profile.email.$error">
+            <div ng-message="required">This is required.</div>
+          </div>
+        </md-input-container>
+
+        <md-input-container flex="50">
+          <label>Mobile Number</label>
+          <input type="tel" required name="number" ng-model="UserProfile.mobileNumber" ng-disabled="!ProfileEdit">
+        </md-input-container>
+      </div>
+
+      <div layout="row">
+          <md-input-container flex="50">
+            <label>City</label>
+            <input type="text" required name="city" ng-model="UserProfile.city" ng-disabled="!ProfileEdit">
+            <div ng-messages="profile.city.$error">
+              <div ng-message="required">This is required.</div>
+            </div>
+          </md-input-container>
+  
+          <md-input-container flex="50">
+            <label>State</label>
+            <input type="text" required name="state" ng-model="UserProfile.state"  ng-disabled="!ProfileEdit">
+          </md-input-container>
+      </div>
+      <md-input-container class="md-block">
+            <label>Address</label> 
+            <textarea required name="address" ng-model="UserProfile.address" rows="3" cols="40"  ng-disabled="!ProfileEdit"></textarea>
+      </md-input-container>
+      <md-card-actions layout="row" layout-align="end center" >
+        <md-button type="submit" class="md-raised md-warn" md-ink-ripple ng-show="ProfileEdit" ng-click="ProfileEdit=!ProfileEdit;cancel();"><span style="color: #fff;">Cancel</span></md-button>
+         <md-button type="submit" class="md-raised md-primary" md-ink-ripple ng-show="ProfileEdit"><span style="color: #fff;">Submit</span></md-button>
+      </md-card-actions>
+    </form>
+  </md-content>
+    <div class="card">
+            <ion-list>
+                <ion-item class="item-icon-left sidemenustyle" ng-click="ChangePassword();">
+                    <i class="icon" style=""><img ng-src="img/png/lock-locked-2x.png"></i>
+                    <h2 style="color: #000;">&emsp;Change Password</h2>
+                </ion-item>
+            </ion-list>
+        </div>
+  </ion-content>
+</ion-view>

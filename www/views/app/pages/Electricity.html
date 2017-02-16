@@ -1,0 +1,83 @@
+<ion-view  cache-view="false">
+<ion-nav-title class="title">Electricity Bill Pay
+</ion-nav-title>
+    <ion-nav-bar class="bar bar-header bar-blue">
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-content has-header="true" padding="true" scroll="false" overflow-scroll='true'>
+        <form ng-submit="ElectrictyBillPay(ElectricityForm.Electricity.$valid)" name="ElectricityForm.Electricity">
+            <md-input-container class="md-block">
+                <label>Please Choose Type</label>
+                <md-select ng-model="ElectricityModel.operator" name="ElectricityOperator" required>
+                    <md-option value="Reliance Energy(Mumbai) Utility">Reliance Energy (Mumbai)</md-option>
+                    <md-option value="MSEDC Limited Utility">MSEDC Limited</md-option>
+                    <md-option value="Torrent Power Utility">Torrent Power</md-option>
+                    <md-option value="BSES Rajdhani">BSES Rajdhani</md-option>
+                    <md-option value="BSES Yamuna">BSES Yamuna</md-option>
+                    <md-option value="North Delhi Power Limited">North Delhi Power Limited</md-option>
+                    <md-option value="Brihan Mumbai Electric Supply and Transport Undertaking">Brihan Mumbai Electric Supply and Transport Undertaking BILL</md-option>
+                    <md-option value="Rajasthan Vidyut Vitran Nigam Limited">Rajasthan Vidyut Vitran Nigam Limited</md-option>
+                    <md-option value="Soouthern power Distribution Company Ltd of Andhra Pradesh( APSPDCL)">Southern power Distribution Company Ltd of Andhra Pradesh( APSPDCL)</md-option>
+                    <md-option value="Bangalore Electricity Supply Company">Bangalore Electricity Supply Company</md-option>
+                    <md-option value="Madhya Pradesh Madhya Kshetra Vidyut Vitaran Company Limited - Bhopal">Madhya Pradesh Madhya Kshetra Vidyut Vitaran Company Limited - Bhopal</md-option>
+                    <md-option value="Noida Power Company Limited">Noida Power Company Limited</md-option>
+                    <md-option value="Madhya Pradesh Paschim Kshetra Vidyut Vitaran Indor">Madhya Pradesh Paschim Kshetra Vidyut Vitaran Indor</md-option>
+                    <md-option value="Calcutta Electricity Supply Ltd">Calcutta Electricity Supply Ltd</md-option>
+                    <md-option value="Chhattisgarh State Electricity Board">Chhattisgarh State Electricity Board</md-option>
+                    <md-option value="India Power Corporation Limited">India Power Corporation Limited</md-option>
+                    <md-option value="Jamshedpur Utilities and Services Company Limited">Jamshedpur Utilities and Services Company Limited</md-option>
+                </md-select>
+                <div ng-messages="ElectricityForm.Electricity.ElectricityOperator.$error">
+                    <div ng-message="required">Please Choose Operator.</div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block" ng-show="ElectricityForm.Electricity.ElectricityOperator.$valid">
+                <label>{{placeholderPhone}}</label>
+                <input ng-model="ElectricityModel.phnumber" name="Electricitynumber" type="number" ng-pattern="/^[0-9]+\b$/" required>
+                <div ng-messages="ElectricityForm.Electricity.Electricitynumber.$error">
+                    <div ng-message="required">Please Choose Operator.</div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block" ng-show="AccoutField && ElectricityForm.Electricity.ElectricityOperator.$valid && ElectricityForm.Electricity.Electricitynumber.$valid && ElectricityForm.Electricity.Electricityamount.$valid">
+                <label>{{placeholderAccount}}</label>
+                <input ng-model="ElectricityModel.accountNo" name="Electricityaccountno" type="number" ng-required="AccoutField">
+                <div ng-messages="ElectricityForm.Electricity.Electricityaccountno.$error">
+                    <div ng-message="required">Enter Correct {{placeholderAccount}}.
+                    </div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block" ng-show="AuthField && !BauthField && ElectricityForm.Electricity.ElectricityOperator.$valid && ElectricityForm.Electricity.Electricitynumber.$valid ">
+                <label>{{placeholderService}}</label>
+                <input ng-model="ElectricityModel.auth" name="Electricityauthno"  type="number" ng-pattern="/^[0-9]{2}$/" ng-required="AuthField">
+                <div ng-messages="ElectricityForm.Electricity.Electricityauthno.$error">
+                    <div ng-message="required">Enter Correct Auth No.</div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block" ng-show="BauthField && !AuthField && ElectricityForm.Electricity.ElectricityOperator.$valid && ElectricityForm.Electricity.Electricitynumber.$valid ">
+                <label>{{placeholderService}}</label>
+                <md-select ng-model="ElectricityModel.Bauth" name="Electricityoperator" ng-required="BauthField">
+                    <md-option value="">Choose Type</md-option>
+                    <md-option value="LLI">Landline Individual</md-option>
+                    <md-option value="LLC">Landline Corporate</md-option>
+                </md-select>
+                <div ng-messages="ElectricityForm.Electricity.Electricityoperator.$error">
+                    <div ng-message="required">Please Choose Operator.</div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block" ng-show="ElectricityForm.Electricity.ElectricityOperator.$valid && ElectricityForm.Electricity.Electricitynumber.$valid && submitFlag">
+                <label>{{placeholderAmount}}</label>
+                <input ng-model="ElectricityModel.amount" name="Electricityamount" type="number" ng-pattern="/^[1-9][0-9]*$/" ng-required="submitFlag" min="1">
+                <div ng-messages="ElectricityForm.Electricity.Electricityamount.$error">
+                    <div ng-message="required">Please Enter Bill Amount.</div>
+                </div>
+            </md-input-container>
+            <div class="padding">
+                <button ng-click="ElectricityFetchBillAmount(ElectricityForm.Electricity.$valid)" ng-hide="submitFlag" class="button button-block button-positive button-small" md-ink-ripple type="button">Fetch Bill Amount</button>
+            </div>
+            <div class="padding" ng-show="submitFlag">
+                <button type="submit" class="button button-block button-positive button-small" md-ink-ripple >Submit</button>
+            </div>
+        </form>
+    </ion-content>
+</ion-view>

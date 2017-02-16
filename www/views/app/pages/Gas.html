@@ -1,0 +1,52 @@
+<ion-view  cache-view="false">
+<ion-nav-title class="title">Gas Bill Pay
+</ion-nav-title>
+    <ion-nav-bar class="bar bar-header bar-blue">
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-content has-header="true" padding="true" scroll="false" overflow-scroll='true'>
+        <form ng-submit="GasBillPay(GasForm.gas.$valid)" name="GasForm.gas" class="block">
+            <md-input-container class="md-block">
+                <label>Please Choose Operator</label>
+                <md-select ng-model="GasBillModel.operator" name="gasoperator" required>
+                    <md-option value="IGL (Indraprast Gas Limited)">IGL (Indraprast Gas Limited)</md-option>
+                    <md-option value="Gujarat Gas company Limited">Gujarat Gas company Limited</md-option>
+                    <md-option value="ADANI GAS">ADANI GAS</md-option>
+                    <md-option value="Mahanagar Gas Limited Utility">Mahanagar Gas Limited Utility</md-option>
+                </md-select>
+                <div ng-messages="GasForm.gas.gasoperator.$error">
+                    <div ng-message="required">Please Choose Operator.</div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block" ng-show="GasForm.gas.gasoperator.$valid">
+                <label>{{placeholderPhone}}</label>
+                <input ng-model="GasBillModel.phnumber" name="gasphnumber"  type="number" ng-pattern="/^[0-9]+\b$/" required>
+                <div ng-messages="GasForm.gas.gasphnumber.$error.required">
+                    <div ng-message="required">Please Enter {{placeholderPhone}}</div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block" ng-show="AccoutField && GasForm.gas.gasoperator.$valid && GasForm.gas.gasphnumber.$valid">
+                <label>{{placeholderAccount}}</label>
+                <input ng-model="GasBillModel.accountNo" name="gasaccountno" type="number" ng-required="AccoutField">
+                <div ng-messages="GasForm.gas.gasaccountno.$error.required">
+                    <div ng-message="required">Enter Correct {{placeholderAccount}}.
+                    </div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block" ng-show="GasForm.gas.gasoperator.$valid && GasForm.gas.gasphnumber.$valid && GasForm.gas.gasaccountno.$valid && submitFlag">
+                <label>{{placeholderAmount}}</label>
+                <input ng-model="GasBillModel.amount" name="gasamount" type="number" ng-pattern="/^[1-9][0-9]*$/" ng-required="submitFlag" min="1">
+                <div ng-messages="GasForm.gas.gasamount.$error.required">
+                    <div ng-message="required">Please Enter Bill Amount.</div>
+                </div>
+            </md-input-container>
+            <div class="padding">
+                <button ng-click="FetchBillAmount(GasForm.gas.$valid)" ng-hide="submitFlag" class="button button-block button-positive button-small" md-ink-ripple type="button">Fetch Bill Amount</button>
+            </div>
+            <div class="padding" ng-show="submitFlag">
+                <button type="submit" class="button button-block button-positive button-small" md-ink-ripple>Submit</button>
+            </div>
+        </form>
+    </ion-content>
+</ion-view>

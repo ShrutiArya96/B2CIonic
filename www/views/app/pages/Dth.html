@@ -1,0 +1,55 @@
+<ion-view  cache-view="false" ng-controller="dthRechargeCtrl">
+<ion-nav-title class="title">Dth Recharge
+</ion-nav-title>
+    <ion-nav-bar class="bar bar-header bar-blue">
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-content has-header="true" padding="true" scroll="false" overflow-scroll='true'>
+        <form ng-submit="DthRecharge(DthRecharge.DthForm.$valid)" name="DthRecharge.DthForm" class="block">
+            <md-input-container class="md-block">
+                <label>Customer ID</label>
+                <!-- <md-icon md-svg-src="img/id.svg"></md-icon> -->
+                <input ng-model="DthRechargeModel.customerid" name="DcustomerId" type="tel" ng-required="true" ng-pattern="/^[0-9]+\b$/">
+                <div ng-messages="DthRecharge.DthForm.DcustomerId.$error">
+                    <div ng-message-exp="['required', 'pattern']">
+                        Please Enter Valide DataCard Number.
+                    </div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Select Operator</label>
+                <!-- <md-icon md-svg-src="img/wifi.svg"></md-icon> -->
+                <md-select  ng-model="DthRechargeModel.operator" name="Doperator" ng-required="true">
+                    <md-option value=null>Choose Operator</md-option>
+                    <md-option value="BIGTV DTH">BIGTV DTH</md-option>
+                    <md-option value="AIRTEL DTH">AIRTEL DTH</md-option>
+                    <md-option value="TATASKY DTH">TATASKY DTH</md-option>
+                    <md-option value="SUN DIRECT DTH">SUN DIRECT DTH</md-option>
+                    <md-option value="VIDEOCON DTH">VIDEOCON DTH</md-option>
+                    <md-option value="DISH TV DTH">DISH TV DTH</md-option>
+                    <md-option value="TATASKY B2B DTH">TATASKY B2B DTH</md-option>
+                </md-select>
+                <div ng-messages="DthRecharge.DthForm.Doperator.$error">
+                    <div ng-message-exp="['required']">
+                        Please Select Operator.
+                    </div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Amount</label>
+                <!-- <md-icon md-svg-src="img/rupee.svg"></md-icon> -->
+                <input ng-model="DthRechargeModel.amount" name="Damount" type="number" ng-required="true" min="1">
+                <div ng-messages="DthRecharge.DthForm.Damount.$error">
+                    <div ng-message-exp="['required','min']">
+                        Enter Valide Amount..
+                    </div>
+                </div>
+            </md-input-container>
+            <!-- <ion-md-input placeholder="Amount" hightlight-color="energized" type="number"></ion-md-input> -->
+            <div class="padding">
+                <button class="button button-block button-positive button-small" md-ink-ripple type="submit">Submit</button>
+            </div>
+        </form>
+    </ion-content>
+</ion-view>

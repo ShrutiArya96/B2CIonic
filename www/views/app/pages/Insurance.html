@@ -1,0 +1,46 @@
+<ion-view  cache-view="false">
+<ion-nav-title class="title">Insurance Bill Pay
+</ion-nav-title>
+    <ion-nav-bar class="bar bar-header bar-blue">
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-content has-header="true" padding="true" scroll="false" overflow-scroll='true'>
+         <form ng-submit="InsuranceBillPay(InsuranceForm.insurance.$valid)" name="InsuranceForm.insurance">
+                    <md-input-container class="md-block">
+                        <label>Please Choose Operator</label>
+                        <md-select ng-model="InsuranceModel.operator" name="Inoperator" required>
+                            <md-option value="Tata AIG Life Utility">Tata AIG Life</md-option>
+                            <md-option value="ICICI Pru Life Utility">ICICI Pru Life</md-option>
+                        </md-select>
+                        <div ng-messages="InsuranceForm.insurance.Inoperator.$error">
+                            <div ng-message="required">Please Choose Operator.</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block" ng-show="InsuranceForm.insurance.Inoperator.$valid">
+                        <label>Policy Number</label>
+                        <input ng-model="InsuranceModel.INnumber" name="Innumber" type="number" ng-pattern="/^[0-9]+\b$/" required>
+                        <div ng-messages="InsuranceForm.insurance.Innumber.$error">
+                            <div ng-message="required">Please Enter Correct Policy Number.</div>
+                        </div>
+                    </md-input-container>
+                    
+                   <md-input-container class="md-block" ng-show="InsuranceForm.insurance.Innumber.$valid && InsuranceForm.insurance.Inoperator.$valid" layout="row">
+                        <md-datepicker ng-model="InsuranceModel.dob" md-placeholder="Date Of Birth" name="Indob" md-open-on-focus required></md-datepicker>
+                    </md-input-container>
+                    <md-input-container class="md-block" ng-show="submitFlag && InsuranceForm.insurance.Inoperator.$valid && InsuranceForm.insurance.Innumber.$valid">
+                        <label>Amount</label>
+                        <input ng-model="InsuranceModel.amount" name="Inamount" type="number" ng-pattern="/^[1-9][0-9]*$/" ng-required="submitFlag" min="1">
+                        <div ng-messages="InsuranceForm.insurance.Inamount.$error">
+                            <div ng-message="required">Please Enter Bill Amount.</div>
+                        </div>
+                    </md-input-container>
+                    <div class="padding">
+                        <button ng-click="InsuranceFetchBillAmount(InsuranceForm.insurance.$valid)" ng-hide="submitFlag" class="button button-block button-positive button-small" type="button" md-ink-ripple>Fetch Bill Amount</button>
+                    </div>
+                    <div class="padding" ng-show="submitFlag">
+                        <button type="submit" class="button button-block button-positive button-small" md-ink-ripple>Submit</button>
+                    </div>
+                </form>
+    </ion-content>
+</ion-view>

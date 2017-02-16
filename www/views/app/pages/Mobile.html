@@ -1,0 +1,95 @@
+<ion-view cache-view="false" ng-controller="RechargeCtrl">
+    <ion-nav-title class="title">Mobile Recharge
+    </ion-nav-title>
+    <ion-nav-bar class="bar bar-header bar-blue">
+        <ion-nav-back-button native-transitions native-transitions-options="{type: 'flip', direction:'left'}">
+        </ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-content has-header="true" padding="true" scroll="false" overflow-scroll='true'>
+        <md-radio-group ng-model="Mobile.Type">
+            <div class="row">
+                <div class="col col-33">
+                    <md-radio-button value="Top-Up" class="md-primary" aria-label="Top-Up" ng-click="revert()">Top-Up</md-radio-button>
+                </div>
+                <div class="col col-33">
+                    <md-radio-button value="Special" class="md-primary" aria-label="Special" ng-click="revert()">Special</md-radio-button>
+                </div>
+                <div class="col col-33">
+                    <md-radio-button value="Post-Paid" class="md-primary" aria-label="Post-Paid" ng-click="revert()">Post-Paid</md-radio-button>
+                </div>
+            </div>
+        </md-radio-group>
+        <form ng-submit="MobileRecharge(RechargeForm.MobileForm.$valid)" name="RechargeForm.MobileForm">
+            <md-input-container class="md-block">
+                <label>Phone Number</label>
+                <!--  <md-icon md-svg-src="img/phone-call.svg"></md-icon> -->
+                <input ng-model="RechargeModel.phnumber" name="Mmobileno" type="tel" maxlength="10" minlength="10" ng-pattern="/^[1-9]([0-9]{1,10}$)/" ng-required="true">
+                <div ng-messages="RechargeForm.MobileForm.Mmobileno.$error" multiple md-auto-hide="false" role="alert">
+                    <div ng-message="minlength">
+                        Minimum 10 digit is required
+                    </div>
+                    <div ng-message="pattern">
+                        Only numbers are allowed.
+                    </div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block" >
+                <label>Select Operator</label>
+                <!-- <md-icon md-svg-src="img/wifi.svg"></md-icon> -->
+                <md-select ng-model="RechargeModel.operator" name="Moperator" ng-required="true">
+                    <md-option ng-value="operator.value" ng-repeat="operator in OperatorList">{{operator.name}}</md-option>
+                </md-select>
+                <div ng-messages="RechargeForm.MobileForm.Moperator.$error" role="alert">
+                    <div ng-message="required">Please Select Operator.</div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block" ng-show="circlefield">
+                <label>Select Operator</label>
+                <md-select ng-model="RechargeModel.circle" name="circle" ng-required="circlefield">
+                    <md-option ng-value="circle.value" ng-repeat="circle in CircleList">{{circle.name}}</md-option>
+                </md-select>
+                <div ng-messages="RechargeForm.MobileForm.circle.$error" role="alert">
+                    <div ng-message="required">Please Select Circle.</div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block" ng-show="circlefield">
+                <label>STD Code</label>
+                <input ng-model="RechargeModel.stdCode" name="stdnumber" type="number" ng-pattern="/^[0-9]+\b$/" ng-required="circlefield" class="inputborder">
+                <div ng-messages="RechargeForm.MobileForm.stdnumber.$error" role="alert">
+                    <div ng-message="required">
+                        Enter Correct STD Code..
+                    </div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block" ng-show="circlefield">
+                <label>Account No.</label>
+                <input ng-model="RechargeModel.accountNo" name="accnumber" type="number" ng-pattern="/^[0-9]+\b$/" ng-required="circlefield">
+                <div ng-messages="RechargeForm.MobileForm.accnumber.$error" role="alert">
+                    <div ng-message="required">
+                        Enter Correct Account No..
+                    </div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Amount</label>
+                <!-- <md-icon md-svg-src="img/rupee.svg"></md-icon> -->
+                <input ng-model="RechargeModel.amount" name="Mamount" required type="number" min="1">
+                <div ng-messages="RechargeForm.MobileForm.Mamount.$error" role="alert">
+                    <div ng-message="required">
+                        Enter Valide Amount..
+                    </div>
+                    <div ng-message="min">
+                        Enter Valide Amount..
+                    </div>
+                </div>
+            </md-input-container>
+          <!--   <button class="button button-clear button-positive" md-ink-ripple ng-show="Mobile.Type == 'Top-Up'" style="float: right;margin-top: -25%;margin-right: 5%;">
+                Browse Plans</button> -->
+            <div class="padding">
+            <md-checkbox class="md-primary" value="fast" ng-click="fast = !fast"><h5>Recharge From Wallet</h5></md-checkbox>
+                <button class="button button-block button-positive button-small" ng-show="!fast" type="submit">Wallet Recharge</button>
+                <button class="button button-block button-positive button-small"  ng-click="Recharge(RechargeForm.MobileForm.$valid)" ng-show="fast" md-ink-ripple type="button">Proceed to {{Mobile.Type}}</button>
+            </div>
+        </form>
+    </ion-content>
+</ion-view>

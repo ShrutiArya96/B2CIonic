@@ -1,0 +1,74 @@
+<ion-view>
+    <ion-nav-title class="title">Recharge Report</ion-nav-title>
+    <ion-nav-bar class="bar bar-header bar-blue">
+        <ion-nav-back-button></ion-nav-back-button>
+        <ion-nav-buttons side="right">
+            <button class="button button-icon button-clear ion-ios-search" ng-click="searchbartoggle()">
+            </button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <div class="bar bar-header bar-blue item-input-inset" ng-show="!searchbar">
+        <button class="button back-button buttons button-clear header-item" ng-click="searchbartoggle();">
+            <i class="icon ion-android-arrow-back"></i>
+        </button>
+        <label class="item-input-wrapper">
+            <i class="icon ion-ios-search placeholder-icon "></i>
+            <input type="search" placeholder="Search " ng-model="search">
+        </label>
+        <button class="button buttons button-clear header-item" ng-click="search = ''"> Cancel
+        </button>
+    </div>
+    <ion-content has-header="true" padding="true" on-scroll="getScrollPosition();" delegate-handle="recharge">
+        <div class="row">
+            <div class="col col-50" style="margin-left:-20px;">
+                <md-datepicker ng-model="RechargeModel.FromDate" md-placeholder="From Date" md-hide-icons="triangle" md-min-date="minDate" md-max-date="maxDate" ng-change="RechargeReport()" md-open-on-focus></md-datepicker>
+            </div>
+            <div class="col col-50">
+                <md-datepicker ng-model="RechargeModel.ToDate" md-placeholder="To Date" md-hide-icons="triangle" md-min-date="RechargeModel.FromDate" md-max-date="maxDate" ng-change="RechargeReport()" md-open-on-focus></md-datepicker>
+            </div>
+        </div>
+        <md-list flex>
+            <md-card md-theme="default" ng-show="RechargeReportList" ng-repeat="Recharge in records | filter: search" class="bs-callout bs-callout-info">
+                <div class="item item-avatar">
+                    <img class="md-card-image" ng-src="{{Images[Recharge.operatorDescription]}}" alt="{{Recharge.operatorDescription}}">
+                    <div class="row row-no-padding">
+                        <div class="col col-50  font-sb-12">
+                            <md-icon md-font-icon="fa-phone" class="fa"></md-icon><b>{{Recharge.mobileNumber}}</b></div>
+                        <div class="col col-50  font-sb-12">Amount: &#8377;&nbsp;<b>{{Recharge.amountTransacted}}</b></div>
+                    </div>
+                    <div class="row row-no-padding">
+                        <div class="col col-50  font-sb-12">ID: &nbsp;<b>{{Recharge.id}}</b></div>
+                        <div class="col col-50  font-sb-12">Status: &nbsp;{{Recharge.status}}</div>
+                    </div>
+                    <div class="row row-no-padding">
+                    <div class="col col-50"></div>
+                    <div class="col col-50">
+                        <p><button class="button small_button button-assertive" ng-if="usertype == 'ROLE_RETAILER'" on-tap="RaiseTicket(Recharge)">Raise Ticket</button></p>
+                    </div>
+                    </div>
+                </div>
+                <div class="row row-no-padding">
+                    <div class="col col-50 font-sb-12" style="padding-left: 10px; padding-top: 10px;">
+                        <md-icon md-font-icon="fa-calendar" class="fa"></md-icon>{{Recharge.updatedDate | date:'medium'}}</div>
+                    <!-- | date:'dd/MM/yyyy' -->
+                    <div class="col col-12">
+                    </div>
+                    <div class="col col-33 font-sb-12">
+                    <a class="button button-icon button-right icon-right ion-chevron-right button-clear button-balanced" ng-click="recharge_details(Recharge)"> Detials</a>
+                       <!--  <a class="item item-icon-right" ng-click="recharge_details(Recharge)">
+                            <md-icon md-svg-icon="img/more_vert.svg"></md-icon>
+                            </a> -->
+                            <!-- <md-button class="md-icon-button" aria-label="Details" ng-click="recharge_details(Recharge)">
+                                <md-icon md-svg-icon="img/more_vert.svg"></md-icon>
+                            </md-button> -->
+                    </div>
+                </div>
+            </md-card>
+        </md-list>
+        <ion-infinite-scroll immediate-check="false" ng-if="!noMoreItemsAvailable" on-infinite="loadMore()" distance="1%">
+        </ion-infinite-scroll>
+    </ion-content>
+    <button id="fab" class="button button-positive button-fab button-fab-bottom-right" md-ink-ripple ng-show="recButton" ng-click="scrollToTop()">
+        <i class="icon ion-ios-arrow-up" style="color: #fff"></i>
+    </button>
+</ion-view>
