@@ -5,9 +5,9 @@ angular.module('App', ['ionic',
         'ngMaterial',
         'ngMessages',
         'ionic-native-transitions',
-        'ionic.cloud'
+        'tabSlideBox'
     ])
-    .constant('API', 'http://192.168.15.110:8080/')
+    .constant('API', 'https://iserveu.online/')
     .run(function($rootScope, AppFactory, $ionicPlatform, $state, $ionicConfig, $timeout, $ionicPopup, $window, $location, $ionicModal) {
         // , $ionicDeploy
         $rootScope.offline = '';
@@ -15,6 +15,14 @@ angular.module('App', ['ionic',
         $ionicPlatform.ready(function() {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
+
+
+            batch.push.registerForRemoteNotifications();
+            batch.setConfig({ "androidAPIKey": "DEV58B2AC37EE71B59C5B8F73A822A" }); // dev
+            // batch.setConfig({"androidAPIKey":"58B2AC37EE3063CA85FFED05EEA5BD"}); // live
+            batch.push.setGCMSenderID("957384237716").setup();
+            batch.start();
+            batch.push.registerForRemoteNotifications();
             if (window.cordova && window.cordova.plugins.Keyboard) {
                 cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
                 cordova.plugins.Keyboard.disableScroll(true);
@@ -77,16 +85,6 @@ angular.module('App', ['ionic',
 
         document.addEventListener("online", onOnline, false);
 
-        // function onOnline() {
-        //     $rootScope.offline = 'false';
-        //     Offlinemodel.remove();
-        //     if (!$rootScope.Dashboard) {
-        //         $rootScope.$broadcast('DashBoardHit');
-        //     } else {
-        //         return
-        //     }
-        // };
-
         function onOnline() {
             $rootScope.offline = 'false';
 
@@ -101,7 +99,12 @@ angular.module('App', ['ionic',
             }
         };
 
-
+        document.addEventListener('batchPushReceived', function(e) {
+            var pushPayload = e.payload;
+            alert(pushPayload);
+            console.log(pushPayload);
+            // Process the payload as you wish here
+        }, false);
 
         $rootScope.GotoSetting = function() {
             cordova.plugins.settings.openSetting("settings", function() {
@@ -118,38 +121,11 @@ angular.module('App', ['ionic',
         $rootScope.$on('$stateChangeStart', function(ev, to, toParams, from, fromParams) {
             if (to.requireAuth && !AppFactory.isLoggedIn()) {
                 $state.go('login', {}, { reload: true });
-            } else if (to.name == 'login' && AppFactory.isLoggedIn()) {
+            } else if ((to.name == 'login' || to.name == 'startingpage') && AppFactory.isLoggedIn()) {
                 ev.preventDefault();
                 $state.go('app.home', {}, { reload: true }, { location: 'replace' });
             }
         });
-
-
-
-        // $ionicDeploy.check().then(function(snapshotAvailable) {
-        //     if (snapshotAvailable) {
-        //         $ionicDeploy.download().then(function() {
-        //             $ionicDeploy.extract().then(function() {
-        //                 $ionicPopup.show({
-        //                     title: 'Update available',
-        //                     subTitle: 'An update was just downloaded. Would you like to restart your app to use the latest features?',
-        //                     buttons: [
-        //                         { text: 'Not now' }, {
-        //                             text: 'Restart',
-        //                             onTap: function(e) {
-        //                                 $ionicDeploy.load();
-        //                             }
-        //                         }
-        //                     ],
-        //                 });
-
-        //             });
-
-        //         });
-
-        //     }
-        // });
-
 
 
     })
@@ -179,7 +155,7 @@ angular.module('App', ['ionic',
 
         };
     })
-    .config(function($stateProvider, $urlRouterProvider, $mdGestureProvider, $ionicConfigProvider, jwtOptionsProvider, $httpProvider, $ionicNativeTransitionsProvider, $ionicCloudProvider) {
+    .config(function($stateProvider, $urlRouterProvider, $mdGestureProvider, $ionicConfigProvider, jwtOptionsProvider, $httpProvider, $ionicNativeTransitionsProvider) {
         $ionicConfigProvider.views.maxCache(3);
         $mdGestureProvider.skipClickHijack();
         $ionicConfigProvider.navBar.alignTitle('center');
@@ -189,29 +165,13 @@ angular.module('App', ['ionic',
             // "fixedPixelsTop"    : 64, // looks OK on iOS
         });
 
-        $ionicCloudProvider.init({
-            "core": {
-                "app_id": "90209a9c"
-            },
-            "push": {
-                "sender_id": "421535327263",
-                "pluginConfig": {
-                    "ios": {
-                        "badge": true,
-                        "sound": true
-                    },
-                    "android": {
-                        "iconColor": "#7f5efe"
-                    }
-                }
-            }
-        });
+
         jwtOptionsProvider.config({
             // 192.168.43.123
             // 192.168.15.186
             //192.168.0.6
             //apiserveu.mybluemix.net
-            whiteListedDomains: ['iserveu.online', 'apiserveu.mybluemix.net', '192.168.15.110','192.168.15.105'],
+            whiteListedDomains: ['iserveu.online', 'apiserveu.mybluemix.net', '192.168.15.110', '192.168.15.105', 'staging.iserveu.online'],
             unauthenticatedRedirectPath: '/login',
             authHeader: 'Authorization',
             authPrefix: '',
@@ -226,14 +186,13 @@ angular.module('App', ['ionic',
 
 
         $stateProvider
-
             .state('login', {
-            cache: false,
-            url: '/login',
-            templateUrl: "views/auth/login.html",
-            controller: 'loginController',
-            requireAuth: false
-        })
+                cache: false,
+                url: '/login',
+                templateUrl: "views/auth/login.html",
+                controller: 'loginController',
+                requireAuth: false
+            })
 
         .state('forgot-password', {
             cache: false,
@@ -260,7 +219,7 @@ angular.module('App', ['ionic',
                     }
                 }
             })
-            .state('app.mobile', {
+        .state('app.mobile', {
                 cache: false,
                 url: "/Mobile",
                 nativeTransitionsAndroid: {
@@ -337,31 +296,21 @@ angular.module('App', ['ionic',
             })
 
         .state('app.insurance', {
-            cache: false,
-            url: "/Insurance",
-            nativeTransitionsAndroid: {
-                "type": "slide",
-                "direction": "left"
-            },
-            requireAuth: true,
-            views: {
-                'menuContent': {
-                    templateUrl: "views/app/pages/Insurance.html",
-                    controller: 'insuranceBillPayCtrl'
-                }
-            }
-        })
-         .state('app.sendmoney', {
                 cache: false,
-                url: "/sendmoney",
+                url: "/Insurance",
+                nativeTransitionsAndroid: {
+                    "type": "slide",
+                    "direction": "left"
+                },
                 requireAuth: true,
                 views: {
                     'menuContent': {
-                        templateUrl: "views/app/pages/sendmoney.html",
-                        controller: "sendmoneyController"
+                        templateUrl: "views/app/pages/Insurance.html",
+                        controller: 'insuranceBillPayCtrl'
                     }
                 }
             })
+           
 
         .state('app.rechargereport', {
             url: '/RechargeReport',

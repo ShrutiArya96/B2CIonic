@@ -92,6 +92,9 @@
                 disableBack: true,
                 historyRoot: true
             });
+            batch.user.getEditor()
+                .setIdentifier(null) // Set to `null` if you want to remove the identifier.
+                .save();
             // Facebook logout
             facebookConnectPlugin.logout(function() {
                     // $ionicLoading.hide();
@@ -100,17 +103,6 @@
                     console.log(fail);
                     // $ionicLoading.hide();
                 });
-
-            // Google logout
-            window.plugins.googleplus.logout(
-                function(msg) {
-                    console.log(msg);
-                    // $ionicLoading.hide();
-                },
-                function(fail) {
-                    console.log(fail);
-                }
-            );
             // $window.location.reload(true);
             $state.go('login', {}, { location: "replace", reload: true });
 

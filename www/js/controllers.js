@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
     // APP
-    .controller('AppCtrl', function($scope, $window, $ionicHistory, $ionicSideMenuDelegate, $ionicModal, $timeout, $rootScope, AppFactory, store, $state, jwtHelper, $ionicLoading, API, $http, $ionicPopover,$ionicPopup) {
+    .controller('AppCtrl', function($scope, $window, $ionicHistory, $ionicSideMenuDelegate, $ionicModal, $timeout, $rootScope, AppFactory, store, $state, jwtHelper, $ionicLoading, API, $http, $ionicPopover, $ionicPopup) {
         var UserInfo = function() {
             $ionicLoading.show({
                 templateUrl: "views/app/Modal/loading.html"
@@ -12,11 +12,15 @@ angular.module('starter.controllers', [])
                     $rootScope.Dashboard = true;
                     console.log(successResponse.data);
                     $scope.User_info = successResponse.data.userInfo;
-                    $scope.UserName = successResponse.data.userInfo.firstName;
+                    $rootScope.UserName = successResponse.data.userInfo.firstName;
                     $rootScope.UserBalance = successResponse.data.userInfo.userBalance;
                     $rootScope.usertype = successResponse.data.userInfo.userType;
                     $rootScope.vpa = successResponse.data.userInfo.userVpa;
                     $rootScope.usermobileNo = successResponse.data.userInfo.userMobileNo;
+                    $rootScope.userVPA = successResponse.data.userInfo.userVpa;
+                    batch.user.getEditor()
+                        .setIdentifier($scope.UserName) // Set to `null` if you want to remove the identifier.
+                        .save();
                     if (successResponse.data.userInfo.userVpa == "" || successResponse.data.userInfo.userVpa == "NA") {
                         $scope.registration();
                     }
@@ -56,14 +60,14 @@ angular.module('starter.controllers', [])
             console.log(error);
             alert("Error calling Hello Plugin");
         }
-       
-         var updatevpa = function(message){
-            var msg = JSON.parse(message);
-             var vpaobj = {
-                'vpa': msg.virtualAddress
-             };
 
-             $http({
+        var updatevpa = function(message) {
+            var msg = JSON.parse(message);
+            var vpaobj = {
+                'vpa': msg.virtualAddress
+            };
+
+            $http({
                 method: 'POST',
                 url: API + 'user/updateupiprofile.json',
                 contentType: 'application/json',
@@ -83,7 +87,7 @@ angular.module('starter.controllers', [])
                         template: errormessage.data.statusDesc
                     });
                 });
-            };
+        };
 
         $scope.$on('DashBoardHit', function(event, data) {
             UserInfo();
@@ -158,6 +162,11 @@ angular.module('starter.controllers', [])
         }
 
 
+        $scope.NotificationPage = function() {
+            $state.go('app.notification');
+        };
+
+
         $scope.toggleLeft = function() {
             $ionicSideMenuDelegate.toggleLeft();
         };
@@ -208,6 +217,113 @@ angular.module('starter.controllers', [])
             alert(msg.title + ': ' + msg.text);
         });
 
+        $scope.transactionStatus = function() {
+
+            var TranStsObj = JSON.stringify({
+                mid: "YBL000000000001",
+                merchantKey: "fdc390bef3ef1ee3d4a7e77fd42238df",
+                merchantTxnID: "9132012",
+                yblTxnId: "",
+                refranceId: ""
+            });
+
+            window.plugins.intent.UPITranSt(TranStsObj, TXNsuccess, TXNfailure);
+
+        };
+
+        var TXNsuccess = function(message) {
+            alert(message);
+            console.log(message);
+        };
+
+        var TXNfailure = function(error) {
+            console.log(error);
+            alert("Error calling Hello Plugin");
+        };
+
+        $scope.authorization = function() {
+            var AuthObj = JSON.stringify({
+                mid: "YBL000000000012",
+                merchantKey: "euygwjb787856gutg565ff",
+                merchantTxnID: "342332443",
+                virtualAddress: "raj@yesb"
+            });
+            window.plugins.intent.UPIRAuth(AuthObj, AUTHsuccess, AUTHfailure);
+        };
+
+        var AUTHsuccess = function(message) {
+            alert(message);
+            console.log(message);
+        };
+
+        var AUTHfailure = function(error) {
+            console.log(error);
+            alert("Error calling Hello Plugin");
+        };
+
+        $scope.setMpin = function() {
+            var MPINObj = JSON.stringify({
+                mid: "YBL000000000012",
+                merchantKey: "euygwjb787856gutg565ff",
+                merchantTxnID: "342332443",
+                virtualAddress: "raj@yesb"
+            });
+            window.plugins.intent.UPIMPIN(MPINObj, MPINsuccess, MPINfailure);
+        };
+
+        var MPINsuccess = function(message) {
+            alert(message);
+            console.log(message);
+        };
+
+        var MPINfailure = function(error) {
+            console.log(error);
+            alert("Error calling Hello Plugin");
+        };
 
 
-    });
+        $scope.accountManagement = function() {
+            var AccmanageObj = JSON.stringify({
+                mid: "YBL000000000012",
+                merchantKey: "euygwjb787856gutg565ff",
+                merchantTxnID: "342332443",
+                virtualAddress: "raj@yesb"
+            });
+            window.plugins.intent.UPIAcc(AccmanageObj, AccMNGsuccess, AccMNGfailure);
+        };
+
+        var AccMNGsuccess = function(message) {
+            alert(message);
+            console.log(message);
+        };
+
+        var AccMNGfailure = function(error) {
+            console.log(error);
+            alert("Error calling Hello Plugin");
+        };
+
+        $scope.raiseDisput = function() {
+            var RaiseDisObj = JSON.stringify({
+                mid: "YBL000000000012",
+                merchantKey: "fdc390bef3ef1ee3d4a7e77fd42238df",
+                merchantTxnID: "12563",
+                trnRefNo: "22252365",
+                diputeType: "Dispute1",
+                disputeRemark: "Dispute Remarks",
+
+            });
+            window.plugins.intent.UPIRaisDis(RaiseDisObj, raiseDisuccess, raiseDifailure);
+        };
+
+        var raiseDisuccess = function(message) {
+            alert(message);
+            console.log(message);
+        };
+
+        var raiseDifailure = function(error) {
+            console.log(error);
+            alert("Error calling Hello Plugin");
+        };
+
+    })
+    

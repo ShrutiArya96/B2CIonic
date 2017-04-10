@@ -1,58 +1,13 @@
 (function() {
     'use strict';
-    var loginController = function($scope, $rootScope, jwtHelper, $http, $state, store, API, $ionicPopup, $ionicLoading, $q, $ionicPush, UserService) {
+    var loginController = function($scope, $rootScope, jwtHelper, $http, $state, store, API, $ionicPopup, $ionicLoading, $q, UserService) {
 
 
         $scope.Login_Model = {};
         $scope.FogotPassModel = {};
         $scope.hideSocial_loginButton = false;
-        // $scope.login = function(Login_Model) {
-        //     $ionicLoading.show({
-        //         templateUrl: "views/app/Modal/loading.html"
-        //     });
-        //     var loginObj = JSON.stringify({
-        //         username: Login_Model.username,
-        //         password: Login_Model.password
-        //     })
-        //     $http({
-        //             url: API + "logintoken.json",
-        //             method: "POST",
-        //             skipAuthorization: true,
-        //             data: loginObj,
-        //             contentType: "application/json",
-
-        //         })
-        //         .then(
-        //             function(successResponse) {
-        //                 $ionicLoading.hide();
-        //                 $scope.token = successResponse.data.token;
-        //                 store.set('jwt', $scope.token);
-        //                 var date = jwtHelper.getTokenExpirationDate($scope.token);
-        //                 console.log(date);
-        //                 console.log($scope.token);
-        //                 $ionicPush.register().then(function(t) {
-        //                     return $ionicPush.saveToken(t);
-        //                 }).then(function(t) {
-        //                     console.log('Token saved:', t.token);
-        //                 });
-        //                 $state.go('app.home');
-        //                 // $state.go('app.recharge');
-        //             },
-        //             function(errorResponse) {
-        //                 $ionicLoading.hide();
-        //                 // $state.go('app.home');
-        //                 console.log(errorResponse);
-        //                 var alertPopup = $ionicPopup.alert({
-        //                     title: 'Login failed!',
-        //                     template: 'Please check your Credentials!'
-        //                 });
-        //                 // $state.go('app.recharge');
-        //             }
-        //         );
-
-        // };
-
-         $scope.admin = "demoisu";
+        
+         $scope.admin = "zobipayb2c";
         $scope.login = function(data) {
             $ionicLoading.show({
                 templateUrl: "views/app/Modal/loading.html"
@@ -86,33 +41,6 @@
                     console.log(errorResponse);
                 })
         }
-         
-        //   function getUserDetails() {
-        //     var parameters = {};
-        //     $http({
-        //         url: API + 'user/dashboard.json',
-        //         method: "GET",
-        //         crossDomain: true,
-        //         skipAuthorization: false,
-        //         params: parameters,
-        //         contentType: "application/json;",
-
-        //     }).then(
-        //         function(successResponse) {
-        //             $ionicLoading.hide();
-        //             $state.go('app.home');
-        //             console.log(successResponse);
-        //             store.set('userdata', successResponse.data.userInfo);
-        //             $rootScope.userName = successResponse.data.userInfo.userName;
-        //             $scope.WalletBalance();
-        //         },
-        //         function(errorResponse) {
-        //             $ionicLoading.hide();
-        //             console.log(errorResponse);
-        //         }
-        //     );
-        // };
-
       
 
 
@@ -175,7 +103,7 @@
 
         //This method is executed when the user press the "Login with facebook" button
         $scope.facebookSignIn = function() {
-
+              $state.go('app.home');
             facebookConnectPlugin.getLoginStatus(function(success) {
                 if (success.status === 'connected') {
                     // the user is logged in and has authenticated your app, and response.authResponse supplies
@@ -237,12 +165,12 @@
 
             window.plugins.googleplus.login({
                     // scopes: 'profile email',
-                    webClientId: '788480011753-0rfmkg5m5nnbc04lr6855ps3jf7q4g6g.apps.googleusercontent.com',
-                    offline: true 
+                    webClientId: '311053834315-02ahd1783m4nmpldm8smhao3jhdknpd5.apps.googleusercontent.com',
+                    offline: false
                 },
                 function(user_data) {
                     console.log(user_data);
-
+                    alert(user_data);
                     //for the purpose of this example I will store user data on local storage
                     UserService.setgoogleUser({
                         userID: user_data.userId,
@@ -259,6 +187,7 @@
                 },
                 function(msg) {
                     $ionicLoading.hide();
+                    alert(msg);
                     console.log(msg);
                 }
             );
@@ -300,17 +229,6 @@
         };
 
         $scope.logout = function() {
-            // Google logout
-            window.plugins.googleplus.logout(
-                function(msg) {
-                    console.log(msg);
-                    alert(msg);
-                    // $ionicLoading.hide();
-                },
-                function(fail) {
-                    console.log(fail);
-                }
-            );
 
             facebookConnectPlugin.logout(function(msg) {
                     console.log(msg);
@@ -321,11 +239,21 @@
                     // $ionicLoading.hide();
                 });
 
+            // Google logout
+                window.plugins.googleplus.logout(
+                    function (msg) {
+                        console.log(msg);
+                    },
+                    function(fail){
+                        console.log(fail);
+                    }
+                );
+
         };
 
         // $ionicDeploy.check();
     };
-    loginController.$inject = ['$scope', '$rootScope', 'jwtHelper', '$http', '$state', 'store', 'API', '$ionicPopup', '$ionicLoading', '$q', '$ionicPush', 'UserService'];
+    loginController.$inject = ['$scope', '$rootScope', 'jwtHelper', '$http', '$state', 'store', 'API', '$ionicPopup', '$ionicLoading', '$q', 'UserService'];
     angular.module("App").controller('loginController', loginController);
 
 }());

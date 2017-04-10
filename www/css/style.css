@@ -7726,9 +7726,9 @@ a.button {
   opacity: 0;
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
-
+/*
 * {
-  color: #444; }
+  color: #444; }*/
 
 .bar.app-top-bar {
   background-color: #11c1f3; }
@@ -8968,4 +8968,80 @@ font-weight: 400;}
 
 .raisebutton{
   margin-top: -5%;margin-left: 20px;margin-bottom: 5px;
+}
+
+.welcome-view .top-content {
+    height: 66%
+}
+
+.welcome-view .top-content .app-copy {
+    text-align: center;
+    padding-top: 13vh
+}
+
+.welcome-view .top-content .app-logo {
+    font-size: 60px;
+    font-family: sans-serif;
+    font-weight: 600;
+    color: #FFF;
+    letter-spacing: 8px;
+    text-transform: uppercase
+}
+
+.welcome-view .top-content .app-tagline {
+    font-size: 16px;
+    margin-top: 0;
+    font-weight: 500;
+    color: rgba(255,255,255,.95)
+}
+
+.welcome-view .bottom-content {
+    height: 34%
+}
+
+.welcome-view .bottom-content .facebook-sign-in,.welcome-view .bottom-content .google-sign-in,.welcome-view .bottom-content .twitter-sign-in {
+    border-radius: 4px;
+    font-weight: 500
+}
+
+.welcome-view .bottom-content .facebook-sign-in {
+    color: #FFF;
+    background-color: #294886;
+    border-color: #27447e
+}
+
+.welcome-view .bottom-content .google-sign-in {
+    color: #FFF;
+    background-color: #dd4c39;
+}
+
+.welcome-view .bottom-content .split-actions {
+    padding: 0
+}
+
+.welcome-view .bottom-content .split-actions .button {
+    margin: 0
+}
+
+.welcome-view .bottom-content .split-actions .col {
+    padding-top: 0;
+    padding-bottom: 0
+}
+
+.welcome-view .bottom-content .split-actions .col:first-child {
+    padding-left: 0
+}
+
+.welcome-view .bottom-content .split-actions .col:last-child {
+    padding-right: 0
+}
+
+.welcome-view .bottom-content .other-actions {
+    margin-top: 20px
+}
+
+.welcome-view .bottom-content .other-actions .button-clear {
+    font-weight: 500;
+    font-size: 14px;
+    color: rgba(255,255,255,.85)
 }

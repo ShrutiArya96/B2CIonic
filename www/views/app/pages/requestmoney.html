@@ -1,0 +1,30 @@
+<ion-view view-title="Request Money">
+  <ion-nav-buttons side="left"></ion-nav-buttons>
+  <ion-tabs class="tabs-striped tabs-top tabs-blue">
+    <ion-tab title="Mobile Number" on-select="">
+      <ion-content overflow-scroll="true" class="tab-content-padding">
+        <form class="padding">
+          <md-input-container class="md-block">
+                    <label>Amount</label>
+                    <input required type="text" name="amount">
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Mobile Number</label>
+                    <input required type="text" name="mobileno">
+                </md-input-container>
+                <center>
+                    <md-button class="md-raised md-primary " md-ink-ripple type="submit"><span>SEND</span></md-button>
+                </center>
+        </form>
+          
+     
+      </ion-content>
+      <div></div>
+    </ion-tab>
+    <ion-tab title="VPA" on-select="">
+      <ion-content overflow-scroll="true" class="tab-content-padding">
+        
+      </ion-content>
+    </ion-tab>
+  </ion-tabs>
+</ion-view>

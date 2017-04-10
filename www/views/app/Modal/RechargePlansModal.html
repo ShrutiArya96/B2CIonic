@@ -1,0 +1,35 @@
+
+<ion-modal-view view-title="Plans" class="plans-modal" hide-nav-bar="true">
+    <ion-content scroll="false" class="plans-modal-content">
+        <tab-slide-box tab="0">
+            <div class="tsb-icons">
+                <div class="tsb-ic-wrp">
+                    <ion-scroll direction="x" class="tsb-hscroll">
+                        <a href="javascript:void(0);" class="{{tab.icon}}" on-finish-render="test()" ng-repeat="plans in recharge_plans">{{plans.category}}</a>
+                    </ion-scroll>
+                </div>
+            </div>
+            <ion-slide-box show-pager="false" on-slide-changed="slideHasChanged($index)">
+                <ion-slide ng-repeat='plans in recharge_plans track by $index'>
+                    <ion-content scroll="true">
+                    <div flex-gt-sm="100" flex>
+                        <md-content>
+                            <md-list class="md-dense" flex>
+                                <md-list-item class="md-3-line" ng-repeat="details in plans.planIds " ng-click="selected_price(details.amount);recharge_Plansmodal.remove();">
+                                    <h3 class="md-avatar" style="font-family: 'open_sansbold'"><small><b>&#8377{{details.amount}}</b></small></h3>
+                                    <div class="md-list-item-text" layout="column">
+                                        <p class="font-sb-12">{{ details.description }}</p>
+                                        <h4><b>Validity: {{ details.validity }}</b></h4>
+                                    </div>
+                                </md-list-item>
+                                <p class="padding"><small>{{DisclaimerMessage}}</small></p>
+                                <md-divider></md-divider>
+                            </md-list>
+                        </md-content>
+                    </div>
+                </ion-content>
+                </ion-slide>
+            </ion-slide-box>
+        </tab-slide-box>
+    </ion-content>
+ </ion-modal-view>

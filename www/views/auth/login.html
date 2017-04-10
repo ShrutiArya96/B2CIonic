@@ -1,64 +1,39 @@
-<style>
-.app-icon {
-    margin-top: 5em;
-    text-align: center;
-}
-
-.content h1 {
-    text-align: center;
-    color: cornflowerblue;
-}
-</style>
-<ion-view cache-view="false">
-    <ion-content style="background-color: #2b47e4" scroll="false">
-        <div class="hero no-header flat">
-            <div class="content">
-                <div class="app-icon">
-                    <img ng-src="img/Payizu.png" width="72%">
-                </div>
-            </div>
-        </div>
-        <br>
-        <br>
-        <br>
-        <div class="bottom-content row" ng-hide="hideSocial_loginButton">
-            <div class="col col-bottom">
-                <button class="button button-block button-positive icon-right ion-social-facebook" ng-click="facebookSignIn()">
-                    Sign In with Facebook
-                </button>
+<ion-view class="welcome-view" cache-view="false">
+    <ion-content scroll="false" class="scroll-content ionic-scroll scroll-content-false login_backgroundimg" >
+        <div class="top-content row">
+            <div class="app-copy col col-center">
+                <h1 class="app-logo"><img ng-src="img/Payizu.png" width="80%"></h1>
             </div>
         </div>
         <div class="bottom-content row" ng-hide="hideSocial_loginButton">
             <div class="col col-bottom">
-                <button class="button button-block button-assertive icon-right ion-social-google" ng-click="googleSignIn()">
-                    Sign In with Google
-                </button>
+                <!-- <a class="google-sign-in button button-block icon-left ion-social-google" ng-click="googleSignIn()">
+                    <span class="btn-copy">Google</span>
+                </a> -->
+                <a class="facebook-sign-in button button-block icon-left ion-social-facebook" ng-click="facebookSignIn()">
+                    <span class="btn-copy">Facebook</span>
+                </a>
+                <!-- <a class="google-sign-in button button-block icon-left" ng-click="logout()">
+                    <span class="btn-copy">Logout</span>
+                </a> -->
             </div>
         </div>
-        <div class="bottom-content row" ng-hide="hideSocial_loginButton">
-        <div class="col col-bottom">
-                <button class="button button-block button-assertive icon-right ion-social-google" ng-click="logout()">
-                    Logout
-                </button>
+        <div class="row form-wrapper" ng-show="hideSocial_loginButton">
+            <div class="col">
+                <form name="authorizationForm" novalidate="" ng-submit="NewUser(authorizationForm.$valid)">
+                    <div class="form-fields-outer list list-inset">
+                        <label class="item item-input">
+                            <input type="phone" placeholder="Mobile Number" name="Phone Number" ng-model="Login_Model.phonenumber" required class="ng-pristine ng-untouched ng-valid-phone ng-invalid ng-invalid-required">
+                        </label>
+                    </div>
+                    <button type="submit" class="log-in button button-block" ng-disabled="authorizationForm.$invalid" disabled="disabled">
+                        Submit
+                    </button>
+                    <p ng-show="error" class="message error ng-binding ng-hide" style=""></p>
+                </form>
             </div>
         </div>
-
-        <form name="authorizationForm" novalidate="" ng-submit="NewUser(authorizationForm.$valid)" ng-show="hideSocial_loginButton">
-        <div class="col">
-            <div class="list">
-                <label class="item item-input">
-                    <span class="input-label">Mobile Number</span>
-                    <input type="text" name="mobilenumber" ng-model="Login_Model.phonenumber" required>
-                </label>
-                <div class="error-container" ng-show="authorizationForm.mobilenumber.$error" ng-messages="authorizationForm.mobilenumber.$error">
-                </div>
-            </div>
-            </div>
-            <div class="col col-bottom">
-            <button class="button button-full button-positive" type="submit">
-               Submit
-            </button>
-            </div>
-        </form>
     </ion-content>
 </ion-view>
+
+
