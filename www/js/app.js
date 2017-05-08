@@ -17,12 +17,12 @@ angular.module('App', ['ionic',
             // for form inputs)
 
 
-            batch.push.registerForRemoteNotifications();
-            batch.setConfig({ "androidAPIKey": "DEV58B2AC37EE71B59C5B8F73A822A" }); // dev
-            // batch.setConfig({"androidAPIKey":"58B2AC37EE3063CA85FFED05EEA5BD"}); // live
-            batch.push.setGCMSenderID("957384237716").setup();
-            batch.start();
-            batch.push.registerForRemoteNotifications();
+            // batch.push.registerForRemoteNotifications();
+            // batch.setConfig({ "androidAPIKey": "DEV58B2AC37EE71B59C5B8F73A822A" }); // dev
+            // // batch.setConfig({"androidAPIKey":"58B2AC37EE3063CA85FFED05EEA5BD"}); // live
+            // batch.push.setGCMSenderID("957384237716").setup();
+            // batch.start();
+            // batch.push.registerForRemoteNotifications();
             if (window.cordova && window.cordova.plugins.Keyboard) {
                 cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
                 cordova.plugins.Keyboard.disableScroll(true);
@@ -99,12 +99,12 @@ angular.module('App', ['ionic',
             }
         };
 
-        document.addEventListener('batchPushReceived', function(e) {
-            var pushPayload = e.payload;
-            alert(pushPayload);
-            console.log(pushPayload);
-            // Process the payload as you wish here
-        }, false);
+        // document.addEventListener('batchPushReceived', function(e) {
+        //     var pushPayload = e.payload;
+        //     alert(pushPayload);
+        //     console.log(pushPayload);
+        //     // Process the payload as you wish here
+        // }, false);
 
         $rootScope.GotoSetting = function() {
             cordova.plugins.settings.openSetting("settings", function() {
@@ -175,9 +175,42 @@ angular.module('App', ['ionic',
             unauthenticatedRedirectPath: '/login',
             authHeader: 'Authorization',
             authPrefix: '',
-            tokenGetter: ['store', 'jwtHelper', '$http', 'API', function(store, jwtHelper, $http, API) {
+            tokenGetter: ['store', 'jwtHelper', '$http', 'API', '$filter', '$state', '$window', '$location', function(store, jwtHelper, $http, API, $filter, $state, $window, $location) {
                 var jwt = store.get('jwt');
-                return jwt;
+                // return jwt;
+                if (jwt) {
+                    var decoded = jwtHelper.decodeToken(jwt);
+                    var currentTime = $filter('date')(new Date(),
+                        'MM dd yyyy - HH:mm:ss');
+                    var exptime = $filter('date')(new Date(decoded.exp * 1000),
+                        'MM dd yyyy - HH:mm:ss');
+                    var diff = Math.abs(new Date(currentTime.split('-')) - new Date(exptime.split('-')));
+                    var minutes = Math.floor((diff / 1000) / 60);
+                    // console.log(minutes);
+                    if (minutes <= 10 && !jwtHelper.isTokenExpired(jwt)) {
+
+                        $http({
+                            url: API + 'logintokenrefresh.json',
+                            skipAuthorization: true,
+                            method: 'POST',
+                            headers: { Authorization: jwt },
+                        }).then(function(response) {
+                            // console.log(response);
+                            store.set('jwt', response.data.token);
+                            return response.data.token;
+                        }, function(response) {
+                            console.log(response);
+                            store.remove('jwt');
+                        });
+                    } else if (jwtHelper.isTokenExpired(jwt)) {
+                        store.remove('jwt');
+                        store.remove('userdata');
+                        $state.go('login', {}, { reload: true });
+                        // $window.location.reload(true);
+                    } else {
+                        return jwt;
+                    }
+                }
             }]
         });
 
@@ -219,7 +252,7 @@ angular.module('App', ['ionic',
                     }
                 }
             })
-        .state('app.mobile', {
+            .state('app.mobile', {
                 cache: false,
                 url: "/Mobile",
                 nativeTransitionsAndroid: {
@@ -296,21 +329,21 @@ angular.module('App', ['ionic',
             })
 
         .state('app.insurance', {
-                cache: false,
-                url: "/Insurance",
-                nativeTransitionsAndroid: {
-                    "type": "slide",
-                    "direction": "left"
-                },
-                requireAuth: true,
-                views: {
-                    'menuContent': {
-                        templateUrl: "views/app/pages/Insurance.html",
-                        controller: 'insuranceBillPayCtrl'
-                    }
+            cache: false,
+            url: "/Insurance",
+            nativeTransitionsAndroid: {
+                "type": "slide",
+                "direction": "left"
+            },
+            requireAuth: true,
+            views: {
+                'menuContent': {
+                    templateUrl: "views/app/pages/Insurance.html",
+                    controller: 'insuranceBillPayCtrl'
                 }
-            })
-           
+            }
+        })
+
 
         .state('app.rechargereport', {
             url: '/RechargeReport',

@@ -12,18 +12,30 @@ angular.module('starter.controllers', [])
                     $rootScope.Dashboard = true;
                     console.log(successResponse.data);
                     $scope.User_info = successResponse.data.userInfo;
-                    $rootScope.UserName = successResponse.data.userInfo.firstName;
+                    // $rootScope.UserName = successResponse.data.userInfo.firstName;
+                    // $rootScope.UserBalance = successResponse.data.userInfo.userBalance;
+                    // $rootScope.usertype = successResponse.data.userInfo.userType;
+                    // $rootScope.vpa = successResponse.data.userInfo.userVpa;
+                    // $rootScope.usermobileNo = successResponse.data.userInfo.userMobileNo;
+                    // $rootScope.userVPA = successResponse.data.userInfo.userVpa;
+
+
+                    $scope.UserName = successResponse.data.userInfo.userName;
                     $rootScope.UserBalance = successResponse.data.userInfo.userBalance;
                     $rootScope.usertype = successResponse.data.userInfo.userType;
-                    $rootScope.vpa = successResponse.data.userInfo.userVpa;
-                    $rootScope.usermobileNo = successResponse.data.userInfo.userMobileNo;
-                    $rootScope.userVPA = successResponse.data.userInfo.userVpa;
-                    batch.user.getEditor()
-                        .setIdentifier($scope.UserName) // Set to `null` if you want to remove the identifier.
-                        .save();
-                    if (successResponse.data.userInfo.userVpa == "" || successResponse.data.userInfo.userVpa == "NA") {
-                        $scope.registration();
-                    }
+                    // $rootScope.mposnumber = successResponse.data.userInfo.mposNumber;
+                    $rootScope.userMobileNo = successResponse.data.userInfo.userProfile.mobileNumber;
+                    $rootScope.userEmail = successResponse.data.userInfo.userProfile.email;
+                    $rootScope.Admin = successResponse.data.userInfo.adminName;
+                    $scope.Brand = JSON.parse(String(successResponse.data.userInfo.userBrand));
+                    $rootScope.BrandName = $scope.Brand.brand;
+                    
+                    // batch.user.getEditor()
+                    //     .setIdentifier($scope.UserName) // Set to `null` if you want to remove the identifier.
+                    //     .save();
+                    // if (successResponse.data.userInfo.userVpa == "" || successResponse.data.userInfo.userVpa == "NA") {
+                    //     $scope.registration();
+                    // }
                     // $rootScope.Admin = successResponse.data.userInfo.adminName;
                     // $scope.Brand = JSON.parse(String(successResponse.data.userInfo.userBrand));
                     // $rootScope.BrandName = $scope.Brand.brand;

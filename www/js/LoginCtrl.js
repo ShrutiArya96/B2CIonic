@@ -240,14 +240,14 @@
                 });
 
             // Google logout
-                window.plugins.googleplus.logout(
-                    function (msg) {
-                        console.log(msg);
-                    },
-                    function(fail){
-                        console.log(fail);
-                    }
-                );
+                // window.plugins.googleplus.logout(
+                //     function (msg) {
+                //         console.log(msg);
+                //     },
+                //     function(fail){
+                //         console.log(fail);
+                //     }
+                // );
 
         };
 

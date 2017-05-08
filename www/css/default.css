@@ -640,3 +640,39 @@ ion-slide .intro-image-row {
 .addbenemodal{top: 10%;right: 5%;bottom: 10%;left: 5%;min-height: 240px;width: 90%;border-radius: 8px;-webkit-box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);background-color: transparent;}
 .addbenemodal-content{background-color: #fff;}
+
+/*p{
+    font-size: 3px;
+    padding:10px; 
+    font-family: robotics;
+    color: rgba(0, 0, 0, 0.9);
+  }*/
+  #i1{
+    width: 40%;
+  }
+  .options{
+    border-right: 1px solid #d1e0e0;
+  }
+  .line{
+    border-bottom: 1px solid #d1e0e0;
+  }
+  .t1{
+    padding-right:10px; 
+     padding-left:10px; 
+  }
+
+  .divider{
+    margin-left: 20px;font-family:robotics;  font-size:14px; letter-spacing: 0.2em; padding-top: 0px;
+  }
+  .back{
+  background-repeat: no-repeat;
+  background-size: cover;     
+  }
+  .polaroid {
+  width: 100%;
+  height: 220px;
+  /*box-shadow: 0px 4px 20px 0px #888844, 2px 4px 20px 2px #888844 ;*/
+/*margin-top: 20px;
+padding-bottom: 5px;*/
+
+}
