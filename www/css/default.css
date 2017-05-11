@@ -1,7 +1,7 @@
 .bar.bar-blue,
 .tabs-blue {
     color: #ffffff;
-    border-color: #304FFE;
+   /* border-color: #304FFE;*/
     background-color: #304FFE;
     background-image: linear-gradient(0deg, #304FFE, #304FFE 50%, transparent 50%);
     color: #fff;

@@ -3236,7 +3236,8 @@ a.subdued {
   font-size: 24px; }
 .platform-android .bar .title {
   font-size: 19px;
-  line-height: 52px; }
+  line-height: 52px;
+  color: white; }
 
 .bar-light .button {
   border-color: #ddd;
@@ -4286,7 +4287,9 @@ ion-tabs.tabs-color-active-dark .tab-item {
   -webkit-transition: -webkit-transform 200ms ease;
   transition: transform 200ms ease; }
   .menu .bar.bar-header.expanded {
-    background-image: url('../img/material-graphite.jpg');
+    /*background-image: url('../img/material-graphite.jpg');*/
+    background-color: #17B8CC;
+
     background-size: 120%;
     background-position: 0%;
     transition: all .5s ease-in-out;
@@ -4828,7 +4831,8 @@ a.item {
   z-index: 2;
   padding: 16px 49px 16px 16px;
   border: none;
-  background-color: #fff; }
+  background-color: #fff;
+ }
 
 a.item-content {
   display: block;
@@ -6679,8 +6683,8 @@ progress {
         box-shadow: none;
         color: #fff; }
   .button.button-positive {
-    border-color: #0c60ee;
-    background-color: #387ef5;
+    
+    background-color: #17B8CC;
     color: #fff; }
     .button.button-positive:hover {
       color: #fff;
@@ -7666,7 +7670,7 @@ a.button {
 [nav-bar-transition="ios"] [nav-bar="active"], [nav-bar-transition="ios"] [nav-bar="entering"] {
   z-index: 10; }
   [nav-bar-transition="ios"] [nav-bar="active"] .bar, [nav-bar-transition="ios"] [nav-bar="entering"] .bar {
-    background: transparent; }
+    background-color:#17B8CC ; }
 [nav-bar-transition="ios"] [nav-bar="cached"] {
   display: block; }
   [nav-bar-transition="ios"] [nav-bar="cached"] .header-item {
@@ -7694,7 +7698,7 @@ a.button {
 [nav-bar-transition="android"] [nav-bar="active"], [nav-bar-transition="android"] [nav-bar="entering"] {
   z-index: 10; }
   [nav-bar-transition="android"] [nav-bar="active"] .bar, [nav-bar-transition="android"] [nav-bar="entering"] .bar {
-    background: transparent; }
+    background-color:#17B8CC ; }
 [nav-bar-transition="android"] [nav-bar="cached"] {
   display: block; }
   [nav-bar-transition="android"] [nav-bar="cached"] .header-item {
@@ -7954,7 +7958,8 @@ ion-spinner.spinner-on-load {
   margin-bottom: 0px; }
 
 ion-side-menu ion-content {
-  background-color: #FFFFFF; }
+  background-color: #FFFFFF;
+   }
 ion-side-menu ion-item.item {
   border-right: none;
   border-left: none;
@@ -7972,8 +7977,9 @@ ion-side-menu ion-item.item {
   ion-side-menu ion-item.item .item-content.activated {
     background-color: #555e68; }
   ion-side-menu ion-item.item .menu-text {
+
     color: #23262a;
-    font-weight: 350;  font-family: 'open_sanssemibold'!important; color: #333; }
+    font-weight: 200;  font-family: 'tahoma'!important; color:#6CACD9; font-size: 13px;}
 ion-side-menu ion-item.item:first-child {
   border-top: none; }
 ion-side-menu ion-item.item:last-child {
@@ -8730,7 +8736,8 @@ font-weight: 400;}
   background-size: 100%; }
 
 .has-expanded-header {
-  top: 140px !important; }
+  top: 140px !important;
+ }
 
 .motion {
   -webkit-transition: all 0.5s ease-out;

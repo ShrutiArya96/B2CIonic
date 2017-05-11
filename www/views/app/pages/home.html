@@ -1,4 +1,5 @@
 <ion-view class="home" view-title="Home" hide-back-button="true" cache-view="false">
+
     <style media="screen">
     .slider-pager {
         display: none;
@@ -8,6 +9,11 @@
         <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
         </button>
     </ion-nav-buttons>
+    
+    <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-ios-bell" ui-sref="app.notifications"  badge="3" badge style="badge-assertive"></button> 
+    </ion-nav-buttons>
+
     <ion-content overflow-scroll='true'>
         <!-- Sliding of Home Page Images Starts from here -->
         <ion-slide-box on-slide-changed="slideHasChanged($index)" does-continue="true" auto-play="true" id="home_slider" style="height: 230px;">
@@ -34,8 +40,8 @@
                 </md-card>
             </ion-slide>
         </ion-slide-box>
-          <div class="divider" style="margin-left: 20px;font-family:robotics;  font-size:14px; letter-spacing: 0.2em; padding-top: 10px;" >
-   RECHARGE OR PAY
+          <div class="divider" style="margin-left: 20px;font-family:tahoma;  font-size:14px; letter-spacing: 0.2em; padding-top: 10px;color:#6CACD9;" >
+<h5 style="color:#6CACD9;">------------- RECHARGE -------------</h5> 
   </div>
         <div class="card">
   
@@ -43,19 +49,19 @@
    <div class="row text-center">
   <div class="col ">
   <div class="options" native-transitions native-transitions-options="{type: 'flip', direction: 'up', duration:100} " ui-sref="app.mobile " style="font-size: 10px; cursor: pointer; color: #444; ">
-    <img src="img/iPhone-48.png" id="i1" >
-    <p style="font-family: robotics;color: #000000">Mobile</p>
+    <img src="img/smartphone-call.svg" id="i1" width="10px" >
+    <p style="font-family: tahoma;color:#8f8f8f">Mobile</p>
 </div></div>
   <div class="col ">
   <div class="options" native-transitions native-transitions-options="{type: 'flip', direction: 'up', duration:100} " ui-sref="app.dth" style="font-size: 10px; cursor: pointer; color: #444; ">
-     <img src="img/TV-48.png" id="i1" >
-     <p style="font-family: robotics;color: #000000">TV</p>
+     <img src="img/television.svg" id="i1" >
+     <p style="font-family: tahoma;color: #8f8f8f">TV</p>
   </div>
 </div>
   <div class="col ">
   <div class="opt" native-transitions native-transitions-options="{type: 'flip', direction: 'up', duration:100} " ui-sref="app.gas " style="font-size: 10px; cursor: pointer; color: #444; ">
-    <img src="img/Gas-48.png" id="i1" >
-    <p style="font-family: robotics;color: #000000">Gas</p>
+    <img src="img/flame.svg" id="i1" >
+    <p style="font-family: tahoma;color:#8f8f8f">Gas</p>
   </div>
 </div>
 </div>
@@ -63,20 +69,20 @@
 <div class="row text-center">
   <div class="col ">
   <div class="options" native-transitions native-transitions-options="{type: 'flip', direction: 'up', duration:100} " ui-sref="app.electricity" style="font-size: 10px; cursor: pointer; color: #444; ">
-     <img src="img/Greentech-48.png" id="i1" >
-     <p style="font-family: robotics;color: #000000">Electricity</p>
+     <img src="img/idea.svg" id="i1" >
+     <p style="font-family: tahoma;color: #8f8f8f">Electricity</p>
   </div>
 </div>
   <div class="col">
   <div class="options" native-transitions native-transitions-options="{type: 'flip', direction: 'up', duration:100} " ui-sref="app.insurance" style="font-size: 10px; cursor: pointer; color: #444; ">
-    <img src="img/Umbrella-48.png" id="i1" >
-    <p style="font-family: robotics;color: #000000">Insurance</p>
+    <img src="img/umbrella.svg" id="i1" >
+    <p style="font-family: tahoma;color:#8f8f8f">Insurance</p>
   </div>
 </div>
   <div class="col ">
-     <img src="img/USB On-48.png" id="i1" style="margin-top: 4px;">
+     <img src="img/pay3.svg" id="i1" style="margin-top: 4px;">
      <div class="opt" native-transitions native-transitions-options="{type: 'flip', direction: 'up', duration:100} " ui-sref="app.datacard " style="font-size: 11px; cursor: pointer; color: #444; ">
-     <p style="font-family: robotics;color: #000000">Data Card</p>
+     <p style="font-family: tahoma;color: #8f8f8f">Data Card</p>
   </div>
 </div>
 </div>
@@ -116,5 +122,20 @@
                 </div>
             </div>
         </div> -->
+
+
+<div class="card">
+  <div class="item item-text-wrap">
+   
+    <div class="list">
+    <a class="item item-thumbnail-left" href="#">
+      <img src="img/analytics.png">
+      <h2 style="color:#6CACD9;margin-top:10px;">Transaction Report</h2>
+      <p>Guidelines and complete details to your transactions.</p>
+    </a>
+
+</div>
+  </div>
+</div>
     </ion-content>
 </ion-view>

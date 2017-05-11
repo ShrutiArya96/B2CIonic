@@ -390,7 +390,24 @@ angular.module('App', ['ionic',
                     controller: 'profileController'
                 }
             }
+        })
+
+        .state('app.notifications',{
+            cache:false,
+            url:"/notifications",
+            requireAuth:true,
+            nativeTransitionsAndroid:{
+                 "type": "slide",
+                "direction": "left"
+            },
+            views: {
+                'menuContent': {
+                    templateUrl: "views/app/pages/notifications.html"
+                    
+                }
+            }
         });
+            
 
         $urlRouterProvider.otherwise(function($injector) {
             var $state = $injector.get('$state');
