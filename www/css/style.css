@@ -1,3 +1,4 @@
+
  Empty. Add your own CSS if you like */
 @charset "UTF-8";
 @import url('https://fonts.googleapis.com/css?family=Roboto');
@@ -4290,9 +4291,9 @@ ion-tabs.tabs-color-active-dark .tab-item {
     /*background-image: url('../img/material-graphite.jpg');*/
     background-color: #17B8CC;
 
-    background-size: 120%;
+    background-size: 100%;
     background-position: 0%;
-    transition: all .5s ease-in-out;
+    /*transition: all .5s ease-in-out;*/
 }
 
 
@@ -7978,8 +7979,8 @@ ion-side-menu ion-item.item {
     background-color: #555e68; }
   ion-side-menu ion-item.item .menu-text {
 
-    color: #23262a;
-    font-weight: 200;  font-family: 'tahoma'!important; color:#6CACD9; font-size: 13px;}
+  color:#6CACD9 !important;
+    font-weight: 400;  font-family: 'tahoma'!important; color:#6CACD9; font-size: 13px;}
 ion-side-menu ion-item.item:first-child {
   border-top: none; }
 ion-side-menu ion-item.item:last-child {
@@ -8733,7 +8734,8 @@ font-weight: 400;}
 
 .menu-open .bar.bar-header.expanded {
   background-position: 0;
-  background-size: 100%; }
+  /*background-size: 100%;*/
+  background-size: 0%; }
 
 .has-expanded-header {
   top: 140px !important;
